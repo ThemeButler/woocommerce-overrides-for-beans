@@ -47,7 +47,7 @@ $woocommerce_loop['loop'] ++;
 				echo $category->name;
 
 				if ( $category->count > 0 )
-					#TODO Double check
+					#TODO Review
 					echo apply_filters( 'woocommerce_subcategory_count_html', ' ' . beans_open_markup( 'woo_product_category_list_item_count', 'mark', array( 'class' => 'count' ) ) . '(' . $category->count . ')' . beans_close_markup( 'woo_product_category_list_item_count', 'mark' ), $category );
 			?>
 		<?php echo beans_close_markup( 'woo_product_category_title', 'h3' ); ?>
