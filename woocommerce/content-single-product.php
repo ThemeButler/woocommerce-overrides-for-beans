@@ -9,9 +9,7 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 ?>
 
@@ -23,10 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 */
 	 do_action( 'woocommerce_before_single_product' );
 
-	 if ( post_password_required() ) {
+	 if ( post_password_required() ) :
+
 	 	echo get_the_password_form();
-	 	return;
-	 }
+
+		return;
+
+	endif;
+
 ?>
 
 <div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
