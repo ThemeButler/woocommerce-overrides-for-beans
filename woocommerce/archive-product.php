@@ -9,9 +9,7 @@
  * @version     2.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 get_header( 'shop' ); ?>
 
@@ -27,7 +25,11 @@ get_header( 'shop' ); ?>
 
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 
-			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+			<?php echo beans_open_markup( 'woo_page_title', 'h1', array( 'class' => 'page-title' ) ); ?>
+
+					<?php woocommerce_page_title(); ?>
+
+				<?php echo beans_close_markup( 'woo_page_title', 'h1' ); ?>
 
 		<?php endif; ?>
 
