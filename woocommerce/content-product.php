@@ -9,44 +9,60 @@
  * @version 2.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product, $woocommerce_loop;
 
 // Store loop count we're currently on
-if ( empty( $woocommerce_loop['loop'] ) ) {
+if ( empty( $woocommerce_loop['loop'] ) ) :
+
 	$woocommerce_loop['loop'] = 0;
-}
+
+endif;
+
 
 // Store column count for displaying the grid
-if ( empty( $woocommerce_loop['columns'] ) ) {
+if ( empty( $woocommerce_loop['columns'] ) ) :
+
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}
+
+endif;
+
 
 // Ensure visibility
-if ( ! $product || ! $product->is_visible() ) {
+if ( ! $product || ! $product->is_visible() ) :
+
 	return;
-}
+
+endif;
+
 
 // Increase loop count
 $woocommerce_loop['loop']++;
 
+
 // Extra post classes
 $classes = array();
-if ( 0 == ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 == $woocommerce_loop['columns'] ) {
+
+if ( 0 == ( $woocommerce_loop['loop'] - 1 ) % $woocommerce_loop['columns'] || 1 == $woocommerce_loop['columns'] ) :
+
 	$classes[] = 'first';
-}
-if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
+
+endif;
+
+if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) :
+
 	$classes[] = 'last';
-}
+
+endif;
+
 ?>
-<li <?php post_class( $classes ); ?>>
+
+<?php echo beans_open_markup( 'woo_content_product_item_wrap', 'li', array( 'class' => implode(' ', get_post_class( $classes ) ) ) ); ?>
 
 	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
-	<a href="<?php the_permalink(); ?>">
+	<?php echo beans_open_markup( 'woo_content_product_item_link', 'a', array( 'href' => get_permalink() ) ); ?>
 
 		<?php
 			/**
@@ -73,7 +89,7 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 			do_action( 'woocommerce_after_shop_loop_item_title' );
 		?>
 
-	</a>
+	<?php echo beans_close_markup( 'woo_content_product_item_link', 'a' ); ?>
 
 	<?php
 
@@ -86,4 +102,4 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 
 	?>
 
-</li>
+	<?php echo beans_close_markup( 'woo_content_product_item_wrap', 'li' ); ?>
