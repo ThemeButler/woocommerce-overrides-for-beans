@@ -17,7 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php echo beans_open_markup( 'woo_content_product_widget_list_item', 'li' ); ?>
 
-	<?php echo beans_open_markup( 'woo_content_product_widget_list_item_link', 'a', array( 'href' => esc_url( get_permalink( $product->id ) ), 'title' => esc_attr( $product->get_title() ) ) ); ?>
+	<?php echo beans_open_markup( 'woo_content_product_widget_list_item_link', 'a', array(
+		'href' => esc_url( get_permalink( $product->id ) ),
+		'title' => esc_attr( $product->get_title() )
+	) ); ?>
 
 		<?php echo $product->get_image(); ?>
 
