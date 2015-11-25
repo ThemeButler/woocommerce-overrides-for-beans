@@ -7,9 +7,7 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product, $woocommerce_loop;
 
@@ -35,9 +33,13 @@ $woocommerce_loop['columns'] = apply_filters( 'woocommerce_cross_sells_columns',
 
 if ( $products->have_posts() ) : ?>
 
-	<div class="cross-sells">
+	<?php echo beans_open_markup( 'woo_cart_cross_sells', 'div', array( 'class' => 'cross-sells' ) ); ?>
 
-		<h2><?php _e( 'You may be interested in&hellip;', 'woocommerce' ) ?></h2>
+		<?php echo beans_open_markup( 'woo_cart_cross_sells_title', 'h2', array( 'class' => 'page-title' ) ); ?>
+
+			<?php _e( 'You may be interested in&hellip;', 'woocommerce' ) ?>
+
+		<?php echo beans_close_markup( 'woo_cart_cross_sells_title', 'h2' ); ?>
 
 		<?php woocommerce_product_loop_start(); ?>
 
@@ -49,7 +51,7 @@ if ( $products->have_posts() ) : ?>
 
 		<?php woocommerce_product_loop_end(); ?>
 
-	</div>
+	<?php echo beans_close_markup( 'woo_cart_cross_sells', 'div' ); ?>
 
 <?php endif;
 
