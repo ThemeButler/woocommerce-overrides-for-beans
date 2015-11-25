@@ -10,38 +10,120 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 
 <?php do_action( 'woocommerce_email_header', $email_heading ); ?>
 
-<p><?php printf( __( 'The order #%d from %s has been cancelled. The order was as follows:', 'woocommerce' ), $order->get_order_number(), $order->get_formatted_billing_full_name() ); ?></p>
+<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_notice', 'p' ); ?>
+
+	<?php printf( __( 'The order #%d from %s has been cancelled. The order was as follows:', 'woocommerce' ), $order->get_order_number(), $order->get_formatted_billing_full_name() ); ?>
+
+<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_notice', 'p' ); ?>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, true, false ); ?>
 
-<h2><a class="link" href="<?php echo admin_url( 'post.php?post=' . $order->id . '&action=edit' ); ?>"><?php printf( __( 'Order: %s', 'woocommerce'), $order->get_order_number() ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', date_i18n( 'c', strtotime( $order->order_date ) ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ); ?>)</h2>
+<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_title', 'h2' ); ?>
 
-<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
-	<thead>
-		<tr>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Quantity', 'woocommerce' ); ?></th>
-			<th class="td" scope="col" style="text-align:left;"><?php _e( 'Price', 'woocommerce' ); ?></th>
-		</tr>
-	</thead>
-	<tbody>
+	<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_link', 'a', array( 'class' => 'link', 'href' => admin_url( 'post.php?post=' . $order->id . '&action=edit' ) ) ); ?>
+
+		<?php printf( __( 'Order: %s', 'woocommerce'), $order->get_order_number() ); ?>
+
+	<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_link', 'a' ); ?> (<?php printf( <?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_time', 'time', array( 'datetime' => '%s' ) ) . '%s' . beans_close_markup( 'woo_emails_admin_cancelled_order_time', 'time' ), date_i18n( 'c', strtotime( $order->order_date ) ), date_i18n( wc_date_format(), strtotime( $order->order_date ) ) ); ?>)
+
+<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_title', 'h2' ); ?>
+
+<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table', 'table', array(
+	'class' => 'td',
+	'cellspacing' => 0,
+	'cellpadding' => 6,
+	'style' => 'width: 100%; font-family: \'Helvetica Neue\', Helvetica, Roboto, Arial, sans-serif;',
+	'border' => 0
+) );
+?>
+
+	<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_head', 'thead' ); ?>
+
+		<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_heading_row', 'tr' ); ?>
+
+			<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_heading_product', 'th', array(
+				'class' => 'td',
+				'scope' => 'col',
+				'style' => 'text-align:left;'
+			) ); ?>
+
+				<?php _e( 'Product', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_heading_product', 'th' ); ?>
+
+			<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_heading_quantity', 'th', array(
+				'class' => 'td',
+				'scope' => 'col',
+				'style' => 'text-align:left;'
+			) ); ?>
+
+				<?php _e( 'Quantity', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_heading_quantity', 'th' ); ?>
+
+			<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_heading_price', 'th', array(
+				'class' => 'td',
+				'scope' => 'col',
+				'style' => 'text-align:left;'
+			) ); ?>
+
+				<?php _e( 'Price', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_heading_price', 'th' ); ?>
+
+		<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_heading_row', 'tr' ); ?>
+
+	<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_head', 'thead' ); ?>
+
+	<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_body', 'tbody' ); ?>
+
 		<?php echo $order->email_order_items_table( false, true ); ?>
-	</tbody>
-	<tfoot>
+
+	<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_head', 'thead' ); ?>
+
+	<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_foot', 'tfoot' ); ?>
+
 		<?php
 			if ( $totals = $order->get_order_item_totals() ) {
 				$i = 0;
 				foreach ( $totals as $total ) {
 					$i++;
-					?><tr>
-						<th class="td" scope="row" colspan="2" style="text-align:left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['label']; ?></th>
-						<td class="td" style="text-align:left; <?php if ( $i == 1 ) echo 'border-top-width: 4px;'; ?>"><?php echo $total['value']; ?></td>
-					</tr><?php
+					?>
+
+					<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_row', 'tr' ); ?>
+
+						<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_total_label', 'th', array(
+							'class' => 'td',
+							'scope' => 'row',
+							'colspan' => 2,
+							'style' => 'text-align: left;' . $i == 1 ? ' border-top-width: 4px;' : null
+							#TODO Double check
+						) ); ?>
+
+							<?php echo $total['label']; ?>
+
+						<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_total_label', 'th' ); ?>
+
+						<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_total_value', 'td', array(
+							'class' => 'td',
+							'style' => 'text-align: left;' . $i == 1 ? ' border-top-width: 4px;' : null
+							#TODO Double check
+						) ); ?>
+
+							<?php echo $total['value']; ?>
+
+						<?php echo beans_open_markup( 'woo_emails_admin_cancelled_order_table_total_value', 'td' ); ?>
+
+					<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_row', 'tr' ); ?>
+
+					<?php
 				}
 			}
 		?>
-	</tfoot>
-</table>
+
+	<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table_foot', 'tfoot' ); ?>
+
+<?php echo beans_close_markup( 'woo_emails_admin_cancelled_order_table', 'table' ); ?>
 
 <?php do_action( 'woocommerce_email_after_order_table', $order, true, false ); ?>
 
