@@ -7,19 +7,41 @@
  * @version     2.3.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-?>
-<li class="payment_method_<?php echo $gateway->id; ?>">
-	<input id="payment_method_<?php echo $gateway->id; ?>" type="radio" class="input-radio" name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>" <?php checked( $gateway->chosen, true ); ?> data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-	<label for="payment_method_<?php echo $gateway->id; ?>">
+?>
+
+<?php echo beans_open_markup( 'woo_checkout_payment_method_list_item', 'li', array( 'class' => 'payment_method_' . $gateway->id ) ); ?>
+
+	<?php echo beans_selfclose_markup( 'woo_checkout_payment_method_list_input', 'input', array(
+		'id' => 'payment_method_' . $gateway->id,
+		'type' => 'radio',
+		'class' => 'input-radio',
+		'name' => 'payment_method',
+		'value' => esc_attr( $gateway->id ),
+		'checked' => checked( $gateway->chosen, true ),
+		#TODO Double check
+		'data-order_button_text' => esc_attr( $gateway->order_button_text )
+	) ); ?>
+
+	<?php echo beans_open_markup( 'woo_checkout_payment_method_list_label', 'label', array( 'for' => 'payment_method_' . $gateway->id ) ); ?>
+
 		<?php echo $gateway->get_title(); ?> <?php echo $gateway->get_icon(); ?>
-	</label>
+
+	<?php echo beans_close_markup( 'woo_checkout_payment_method_list_label', 'label' ); ?>
+
 	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-		<div class="payment_box payment_method_<?php echo $gateway->id; ?>" <?php if ( ! $gateway->chosen ) : ?>style="display:none;"<?php endif; ?>>
+
+		<?php echo beans_open_markup( 'woo_checkout_payment_method_list_fields', 'div', array(
+			'class' => 'payment_box payment_method_' . $gateway->id,
+			'style' => ! $gateway->chosen ? 'display:none;' : null
+			#TODO Double check
+		) ); ?>
+
 			<?php $gateway->payment_fields(); ?>
-		</div>
+
+		<?php echo beans_close_markup( 'woo_checkout_payment_method_list_fields', 'div' ); ?>
+
 	<?php endif; ?>
-</li>
+
+<?php echo beans_close_markup( 'woo_checkout_payment_method_list_item', 'li' ); ?>
