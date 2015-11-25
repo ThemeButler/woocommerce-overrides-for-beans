@@ -31,7 +31,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 ?>
 
-<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php echo beans_open_markup( 'woo_product_single_wrap', 'div', array( 'itemscope' => '', 'itemtype' => woocommerce_get_product_schema(), 'id' => 'product-' . the_ID(), 'class' => implode(' ', post_class() ) ) ); ?>
+
+<?php #TODO Double check ?>
 
 	<?php
 		/**
@@ -43,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		do_action( 'woocommerce_before_single_product_summary' );
 	?>
 
-	<div class="summary entry-summary">
+	<?php echo beans_open_markup( 'woo_product_single_summary', 'div', array( 'class' => 'summary entry-summary' ) ); ?>
 
 		<?php
 			/**
@@ -60,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			do_action( 'woocommerce_single_product_summary' );
 		?>
 
-	</div><!-- .summary -->
+	<?php echo beans_close_markup( 'woo_product_single_summary', 'div' ); ?>
 
 	<?php
 		/**
@@ -73,8 +75,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		do_action( 'woocommerce_after_single_product_summary' );
 	?>
 
-	<meta itemprop="url" content="<?php the_permalink(); ?>" />
+	<?php echo beans_selfclose_markup( 'woo_product_single_meta_url', 'meta', array( 'itemprop' => 'url', 'content' => the_permalink() ) ); ?>
 
-</div><!-- #product-<?php the_ID(); ?> -->
+<?php echo beans_close_markup( 'woo_product_single_wrap', 'div' ); ?><!-- #product-<?php the_ID(); ?> -->
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
