@@ -14,21 +14,25 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $woocommerce_loop;
 
 // Store loop count we're currently on
-if ( empty( $woocommerce_loop['loop'] ) ) {
+if ( empty( $woocommerce_loop['loop'] ) ) :
+
 	$woocommerce_loop['loop'] = 0;
-}
+
+endif;
 
 // Store column count for displaying the grid
-if ( empty( $woocommerce_loop['columns'] ) ) {
+if ( empty( $woocommerce_loop['columns'] ) ) :
+
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
-}
+
+endif;
 
 // Increase loop count
 $woocommerce_loop['loop'] ++;
 
 ?>
 
-<?php echo beans_open_markup( 'woo_product_category_list_item', 'li', array( 'class' => wc_product_cat_class() ) ); ?>
+<?php echo beans_open_markup( 'woo_product_category_list_item', 'li', array( wc_product_cat_class() ) ); ?>
 
 	<?php do_action( 'woocommerce_before_subcategory', $category ); ?>
 
@@ -42,21 +46,27 @@ $woocommerce_loop['loop'] ++;
 			 */
 			do_action( 'woocommerce_before_subcategory_title', $category );
 		?>
+
 		<?php echo beans_open_markup( 'woo_product_category_title', 'h3' ); ?>
+
 			<?php
+
 				echo $category->name;
 
 				if ( $category->count > 0 )
-					#TODO Review
-					echo apply_filters( 'woocommerce_subcategory_count_html', ' ' . beans_open_markup( 'woo_product_category_list_item_count', 'mark', array( 'class' => 'count' ) ) . '(' . $category->count . ')' . beans_close_markup( 'woo_product_category_list_item_count', 'mark' ), $category );
+					echo apply_filters( 'woocommerce_subcategory_count_html', beans_open_markup( 'woo_subcategory_count_html', 'mark', array( 'class' => 'count' ) ) . ' (' . $category->count . ')' . beans_close_markup( 'woo_subcategory_count_html', 'mark' ), $category );
+
 			?>
+
 		<?php echo beans_close_markup( 'woo_product_category_title', 'h3' ); ?>
 
 		<?php
+
 			/**
 			 * woocommerce_after_subcategory_title hook
 			 */
 			do_action( 'woocommerce_after_subcategory_title', $category );
+
 		?>
 
 	<?php echo beans_close_markup( 'woo_product_category_link', 'a' ); ?>
