@@ -7,33 +7,50 @@
  * @version     2.2.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 ?>
-<div class="woocommerce-shipping-fields">
+
+<?php echo beans_open_markup( 'woo_checkout_shipping_fields', 'div', array( 'class' => 'woocommerce-shipping-fields' ) ); ?>
+
 	<?php if ( WC()->cart->needs_shipping_address() === true ) : ?>
 
-		<?php
-			if ( empty( $_POST ) ) {
+		<?php if ( empty( $_POST ) ) : ?>
 
-				$ship_to_different_address = get_option( 'woocommerce_ship_to_destination' ) === 'shipping' ? 1 : 0;
-				$ship_to_different_address = apply_filters( 'woocommerce_ship_to_different_address_checked', $ship_to_different_address );
+			<?php $ship_to_different_address = get_option( 'woocommerce_ship_to_destination' ) === 'shipping' ? 1 : 0; ?>
 
-			} else {
+			<?php $ship_to_different_address = apply_filters( 'woocommerce_ship_to_different_address_checked', $ship_to_different_address ); ?>
 
-				$ship_to_different_address = $checkout->get_value( 'ship_to_different_address' );
+		<?php else : ?>
 
-			}
-		?>
+			<?php $ship_to_different_address = $checkout->get_value( 'ship_to_different_address' ); ?>
 
-		<h3 id="ship-to-different-address">
-			<label for="ship-to-different-address-checkbox" class="checkbox"><?php _e( 'Ship to a different address?', 'woocommerce' ); ?></label>
-			<input id="ship-to-different-address-checkbox" class="input-checkbox" <?php checked( $ship_to_different_address, 1 ); ?> type="checkbox" name="ship_to_different_address" value="1" />
-		</h3>
+		<?php endif; ?>
 
-		<div class="shipping_address">
+		<?php echo beans_open_markup( 'woo_checkout_shipping_fields_title', 'h3', array( 'id' => 'ship-to-different-address' ) ); ?>
+
+			<?php echo beans_open_markup( 'woo_checkout_shipping_different_address_label', 'label', array(
+				'for' => 'ship-to-different-address-checkbox',
+				'class' => 'checkbox'
+			) ); ?>
+
+				<?php _e( 'Ship to a different address?', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_checkout_shipping_different_address_label', 'label' ); ?>
+
+			<?php echo beans_selfclose_markup( 'woo_checkout_shipping_different_address_input', 'input', array(
+				'id' => 'ship-to-different-address-checkbox',
+				'class' => 'input-checkbox',
+				'checked' => checked( $ship_to_different_address, 1 ),
+				#TODO Double check
+				'type' => 'checkbox',
+				'name' => 'ship_to_different_address',
+				'value' => 1
+			) ); ?>
+
+		<?php echo beans_close_markup( 'woo_checkout_shipping_fields_title', 'h3' ); ?>
+
+		<?php echo beans_open_markup( 'woo_checkout_shipping_address_wrap', 'div', array( 'class' => 'shipping_address' ) ); ?>
 
 			<?php do_action( 'woocommerce_before_checkout_shipping_form', $checkout ); ?>
 
@@ -45,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php do_action( 'woocommerce_after_checkout_shipping_form', $checkout ); ?>
 
-		</div>
+		<?php echo beans_close_markup( 'woo_checkout_shipping_address_wrap', 'div' ); ?>
 
 	<?php endif; ?>
 
@@ -55,7 +72,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<?php if ( ! WC()->cart->needs_shipping() || WC()->cart->ship_to_billing_address_only() ) : ?>
 
-			<h3><?php _e( 'Additional Information', 'woocommerce' ); ?></h3>
+			<?php echo beans_open_markup( 'woo_checkout_additional_info_title', 'h3' ); ?>
+
+				<?php _e( 'Additional Information', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_checkout_additional_info_title', 'h3' ); ?>
 
 		<?php endif; ?>
 
@@ -68,4 +89,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
 	<?php do_action( 'woocommerce_after_order_notes', $checkout ); ?>
-</div>
+
+<?php echo beans_close_markup( 'woo_checkout_shipping_fields', 'div' ); ?>
