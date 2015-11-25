@@ -20,14 +20,12 @@ if ( empty( $woocommerce_loop['loop'] ) ) :
 
 endif;
 
-
 // Store column count for displaying the grid
 if ( empty( $woocommerce_loop['columns'] ) ) :
 
 	$woocommerce_loop['columns'] = apply_filters( 'loop_shop_columns', 4 );
 
 endif;
-
 
 // Ensure visibility
 if ( ! $product || ! $product->is_visible() ) :
@@ -36,10 +34,8 @@ if ( ! $product || ! $product->is_visible() ) :
 
 endif;
 
-
 // Increase loop count
 $woocommerce_loop['loop']++;
-
 
 // Extra post classes
 $classes = array();
@@ -58,11 +54,11 @@ endif;
 
 ?>
 
-<?php echo beans_open_markup( 'woo_content_product_item_wrap', 'li', array( 'class' => implode(' ', get_post_class( $classes ) ) ) ); ?>
+<?php echo beans_open_markup( 'woo_product_item_wrap', 'li', array( 'class' => implode(' ', get_post_class( $classes ) ) ) ); ?>
 
 	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
-	<?php echo beans_open_markup( 'woo_content_product_item_link', 'a', array( 'href' => get_permalink() ) ); ?>
+	<?php echo beans_open_markup( 'woo_product_item_link', 'a', array( 'href' => get_permalink() ) ); ?>
 
 		<?php
 			/**
@@ -89,7 +85,7 @@ endif;
 			do_action( 'woocommerce_after_shop_loop_item_title' );
 		?>
 
-	<?php echo beans_close_markup( 'woo_content_product_item_link', 'a' ); ?>
+	<?php echo beans_close_markup( 'woo_product_item_link', 'a' ); ?>
 
 	<?php
 
@@ -102,4 +98,4 @@ endif;
 
 	?>
 
-	<?php echo beans_close_markup( 'woo_content_product_item_wrap', 'li' ); ?>
+	<?php echo beans_close_markup( 'woo_product_item_wrap', 'li' ); ?>
