@@ -9,8 +9,15 @@
  * @version 2.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-echo '<a href="' . esc_url( WC()->cart->get_checkout_url() ) . '" class="checkout-button button alt wc-forward">' . __( 'Proceed to Checkout', 'woocommerce' ) . '</a>';
+?>
+
+<?php echo beans_open_markup( 'woo_cart_checkout_link', 'a', array(
+    'href' => esc_url( WC()->cart->get_checkout_url() ),
+    'class' => 'checkout-button button alt wc-forward'
+) ); ?>
+
+    <?php __( 'Proceed to Checkout', 'woocommerce' ); ?>
+
+<?php echo beans_close_markup( 'woo_cart_checkout_link', 'a' ); ?>
