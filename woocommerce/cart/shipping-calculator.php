@@ -7,87 +7,214 @@
  * @version     2.0.8
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( get_option( 'woocommerce_enable_shipping_calc' ) === 'no' || ! WC()->cart->needs_shipping() ) {
+if ( get_option( 'woocommerce_enable_shipping_calc' ) === 'no' || ! WC()->cart->needs_shipping() ) :
+
 	return;
-}
+
+endif;
 
 ?>
 
 <?php do_action( 'woocommerce_before_shipping_calculator' ); ?>
 
-<form class="woocommerce-shipping-calculator" action="<?php echo esc_url( WC()->cart->get_cart_url() ); ?>" method="post">
+<?php echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
+	'class' => 'woocommerce-shipping-calculator',
+	'action' => esc_url( WC()->cart->get_cart_url() ),
+	'method' => 'post'
+) ); ?>
 
-	<p><a href="#" class="shipping-calculator-button"><?php _e( 'Calculate Shipping', 'woocommerce' ); ?></a></p>
+	<?php echo beans_open_markup( 'woo_shipping_calculator_link_wrap', 'p' ); ?>
 
-	<section class="shipping-calculator-form" style="display:none;">
+	<?php echo beans_open_markup( 'woo_shipping_calculator_link', 'a', array(
+		'href' => '#',
+		'class' => 'shipping-calculator-button'
+	) ); ?>
 
-		<p class="form-row form-row-wide" id="calc_shipping_country_field">
-			<select name="calc_shipping_country" id="calc_shipping_country" class="country_to_state" rel="calc_shipping_state">
-				<option value=""><?php _e( 'Select a country&hellip;', 'woocommerce' ); ?></option>
-				<?php
-					foreach( WC()->countries->get_shipping_countries() as $key => $value )
-						echo '<option value="' . esc_attr( $key ) . '"' . selected( WC()->customer->get_shipping_country(), esc_attr( $key ), false ) . '>' . esc_html( $value ) . '</option>';
-				?>
-			</select>
-		</p>
+	<?php _e( 'Calculate Shipping', 'woocommerce' ); ?>
 
-		<p class="form-row form-row-wide" id="calc_shipping_state_field">
+	<?php echo beans_open_markup( 'woo_shipping_calculator_link', 'a' ); ?>
+
+	<?php echo beans_close_markup( 'woo_shipping_calculator_link_wrap', 'p' ); ?>
+
+	<?php echo beans_open_markup( 'woo_shipping_calculator_section', 'section', array(
+		'class' => 'shipping-calculator-form',
+		'style' => 'display:none;'
+	) ); ?>
+
+		<?php echo beans_close_markup( 'woo_shipping_calculator_country', 'p', array(
+			'class' => 'form-row form-row-wide',
+			'id' => 'calc_shipping_country_field'
+		) ); ?>
+
+			<?php echo beans_close_markup( 'woo_shipping_calculator_country_select', 'select', array(
+				'name' => 'calc_shipping_country',
+				'id' => 'calc_shipping_country',
+				'class' => 'country_to_state',
+				'rel' => 'calc_shipping_state'
+			) ); ?>
+
+				<?php echo beans_open_markup( 'woo_shipping_calculator_country_option_default', 'option', array( 'value' => '' ) ); ?>
+
+					<?php _e( 'Select a country&hellip;', 'woocommerce' ); ?>
+
+				<?php echo beans_close_markup( 'woo_shipping_calculator_country_option_default' ); ?>
+
+				<?php foreach( WC()->countries->get_shipping_countries() as $key => $value ) : ?>
+
+					<?php echo beans_open_markup( 'woo_shipping_calculator_country_option_' . esc_attr( $key ), 'option', array(
+						'value' => esc_attr( $key ),
+						'selected' => selected( WC()->customer->get_shipping_country()
+						#TODO Double check
+					) ); ?>
+
+						<?php echo esc_html( $value ); ?>
+
+					<?php echo beans_close_markup( 'woo_shipping_calculator_country_option_' . esc_attr( $key ), 'option' ); ?>
+
+				<?php endforeach; ?>
+
+			<?php echo beans_close_markup( 'woo_shipping_calculator_country_select', 'select' ); ?>
+
+		<?php echo beans_close_markup( 'woo_shipping_calculator_country', 'p' ); ?>
+
+		<?php echo beans_open_markup( 'woo_shipping_calculator_state', 'p', array(
+			'class' => 'form-row form-row-wide',
+			'id' => 'calc_shipping_state_field'
+		) ); ?>
+
 			<?php
+
 				$current_cc = WC()->customer->get_shipping_country();
 				$current_r  = WC()->customer->get_shipping_state();
 				$states     = WC()->countries->get_states( $current_cc );
 
 				// Hidden Input
-				if ( is_array( $states ) && empty( $states ) ) {
+				if ( is_array( $states ) && empty( $states ) ) : ?>
 
-					?><input type="hidden" name="calc_shipping_state" id="calc_shipping_state" placeholder="<?php esc_attr_e( 'State / county', 'woocommerce' ); ?>" /><?php
+					<?php echo beans_selfclose_markup( 'woo_shipping_calculator_state_hidden_input', 'input', array(
+						'type' => 'hidden',
+						'name' => 'calc_shipping_state',
+						'id' => 'calc_shipping_state',
+						'placeholder' => esc_attr_e( 'State / county', 'woocommerce'
+					) ); ?>
+
+				<?php
 
 				// Dropdown Input
-				} elseif ( is_array( $states ) ) {
+				elseif ( is_array( $states ) ) : ?>
 
-					?><span>
-						<select name="calc_shipping_state" id="calc_shipping_state" placeholder="<?php esc_attr_e( 'State / county', 'woocommerce' ); ?>">
-							<option value=""><?php _e( 'Select a state&hellip;', 'woocommerce' ); ?></option>
-							<?php
-								foreach ( $states as $ckey => $cvalue )
-									echo '<option value="' . esc_attr( $ckey ) . '" ' . selected( $current_r, $ckey, false ) . '>' . __( esc_html( $cvalue ), 'woocommerce' ) .'</option>';
-							?>
-						</select>
-					</span><?php
+					<?php echo beans_open_markup( 'woo_shipping_calculator_state_wrap', 'span' ); ?>
+
+						<?php echo beans_open_markup( 'woo_shipping_calculator_state_select', 'select', array(
+							'name' => 'calc_shipping_state',
+							'id' => 'calc_shipping_state',
+							'placeholder' => esc_attr_e( 'State / county', 'woocommerce' )
+						) ); ?>
+
+							<?php echo beans_open_markup( 'woo_shipping_calculator_state_option_default', 'option', array( 'value' => '' ) ); ?>
+
+								<?php _e( 'Select a state&hellip;', 'woocommerce' ); ?>
+
+							<?php echo beans_close_markup( 'woo_shipping_calculator_state_option_default', 'option' ); ?>
+
+							<?php foreach ( $states as $ckey => $cvalue ) : ?>
+
+								<?php echo beans_open_markup( 'woo_shipping_calculator_state_option_' . esc_attr( $ckey ), 'option', array(
+									'value' => esc_attr( $ckey ),
+									'selected' => selected( $current_r, $ckey, false )
+									#TODO Double check
+								) ); ?>
+
+									<?php __( esc_html( $cvalue ); ?>
+
+								<?php echo beans_close_markup( 'woo_shipping_calculator_state_option_' . esc_attr( $ckey ), 'option' ); ?>
+
+							<?php endforeach; ?>
+
+						<?php echo beans_close_markup( 'woo_shipping_calculator_state_select', 'select' ); ?>
+
+					<?php echo beans_close_markup( 'woo_shipping_calculator_state_wrap', 'span' ); ?>
+
+					<?php
 
 				// Standard Input
-				} else {
 
-					?><input type="text" class="input-text" value="<?php echo esc_attr( $current_r ); ?>" placeholder="<?php esc_attr_e( 'State / county', 'woocommerce' ); ?>" name="calc_shipping_state" id="calc_shipping_state" /><?php
+				else : ?>
 
-				}
-			?>
-		</p>
+					<?php echo beans_selfclose_markup( 'woo_shipping_calculator_state_input', 'input', array(
+						'type' => 'text',
+						'class' => 'input-text',
+						'value' => esc_attr( $current_r ),
+						'placeholder' => esc_attr_e( 'State / county', 'woocommerce' ),
+						'name' => 'calc_shipping_state',
+						'id' => 'calc_shipping_state'
+					) ); ?>
+
+		<?php endif; ?>
+
+		<?php echo beans_close_markup( 'woo_shipping_calculator_state', 'p' ); ?>
 
 		<?php if ( apply_filters( 'woocommerce_shipping_calculator_enable_city', false ) ) : ?>
 
-			<p class="form-row form-row-wide" id="calc_shipping_city_field">
-				<input type="text" class="input-text" value="<?php echo esc_attr( WC()->customer->get_shipping_city() ); ?>" placeholder="<?php esc_attr_e( 'City', 'woocommerce' ); ?>" name="calc_shipping_city" id="calc_shipping_city" />
-			</p>
+			<?php echo beans_open_markup( 'woo_shipping_calculator_city', 'p', array(
+				'class' => 'form-row form-row-wide',
+				'id' => 'calc_shipping_city_field'
+			) ); ?>
+
+				<?php echo beans_selfclose_markup( 'woo_shipping_calculator_city_input', 'input', array(
+					'type' => 'text',
+					'class' => 'input-text',
+					'value' => esc_attr( WC()->customer->get_shipping_city(),
+					'placeholder' => esc_attr_e( 'City', 'woocommerce' ),
+					'name' => 'calc_shipping_city',
+					'id' => 'calc_shipping_city'
+				) ); ?>
+
+			<?php echo beans_close_markup( 'woo_shipping_calculator_city', 'p' ); ?>
 
 		<?php endif; ?>
 
 		<?php if ( apply_filters( 'woocommerce_shipping_calculator_enable_postcode', true ) ) : ?>
 
-			<p class="form-row form-row-wide" id="calc_shipping_postcode_field">
-				<input type="text" class="input-text" value="<?php echo esc_attr( WC()->customer->get_shipping_postcode() ); ?>" placeholder="<?php esc_attr_e( 'Postcode / Zip', 'woocommerce' ); ?>" name="calc_shipping_postcode" id="calc_shipping_postcode" />
-			</p>
+			<?php echo beans_open_markup( 'woo_shipping_calculator_postcode', 'p', array(
+				'class' => 'form-row form-row-wide',
+				'id' => 'calc_shipping_city_field'
+			) ); ?>
+
+				<?php echo beans_selfclose_markup( 'woo_shipping_calculator_postcode_input', 'input', array(
+					'type' => 'text',
+					'class' => 'input-text',
+					'value' => esc_attr( WC()->customer->get_shipping_postcode() ),
+					'placeholder' => esc_attr_e( 'Postcode / Zip', 'woocommerce' ),
+					'name' => 'calc_shipping_postcode',
+					'id' => 'calc_shipping_postcode'
+				) ); ?>
+
+			<?php echo beans_close_markup( 'woo_shipping_calculator_postcode', 'p' ); ?>
 
 		<?php endif; ?>
 
-		<p><button type="submit" name="calc_shipping" value="1" class="button"><?php _e( 'Update Totals', 'woocommerce' ); ?></button></p>
+		<?php echo beans_open_markup( 'woo_shipping_calculator_button_wrap', 'p' ); ?>
+
+			<?php echo beans_open_markup( 'woo_shipping_calculator_submit_button', 'button', array(
+				'type' => 'submit',
+				'name' => 'calc_shipping',
+				'value' => 1,
+				'class' => 'button'
+			) ); ?>
+
+				<?php _e( 'Update Totals', 'woocommerce' ); ?>
+
+			<?php echo beans_close_markup( 'woo_shipping_calculator_submit_button', 'button' ); ?>
+
+		<?php echo beans_close_markup( 'woo_shipping_calculator_button_wrap', 'p' ); ?>
 
 		<?php wp_nonce_field( 'woocommerce-cart' ); ?>
-	</section>
-</form>
+
+	<?php echo beans_close_markup( 'woo_shipping_calculator_section', 'section' ); ?>
+
+<?php echo beans_open_markup( 'woo_shipping_calculator_form', 'form'); ?>
 
 <?php do_action( 'woocommerce_after_shipping_calculator' ); ?>
