@@ -7,16 +7,29 @@
  * @version 2.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 wc_print_notices();
 
 ?>
 
-<p class="cart-empty"><?php _e( 'Your cart is currently empty.', 'woocommerce' ) ?></p>
+<?php echo beans_open_markup( 'woo_cart_empty_notice', 'p', array( 'class' => 'cart-empty' ) ); ?>
+
+    <?php _e( 'Your cart is currently empty.', 'woocommerce' ) ?>
+
+<?php echo beans_close_markup( 'woo_product_item_link', 'p' ); ?>
 
 <?php do_action( 'woocommerce_cart_is_empty' ); ?>
 
-<p class="return-to-shop"><a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>"><?php _e( 'Return To Shop', 'woocommerce' ) ?></a></p>
+<?php echo beans_open_markup( 'woo_cart_back_to_shop', 'p', array( 'class' => 'return-to-shop' ) ); ?>
+
+    <?php echo beans_open_markup( 'woo_cart_back_to_shop_link', 'a', array(
+        'href' => esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ),
+        'class' => 'button wc-backward'
+    ) ); ?>
+
+        <?php _e( 'Return To Shop', 'woocommerce' ) ?>
+
+    <?php echo beans_open_markup( 'woo_cart_back_to_shop_link', 'a' ); ?>
+
+<?php echo beans_close_markup( 'woo_cart_back_to_shop', 'p' ); ?>
