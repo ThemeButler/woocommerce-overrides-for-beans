@@ -11,31 +11,25 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
+/**
+ * woocommerce_before_single_product hook
+ *
+ * @hooked wc_print_notices - 10
+ */
+ do_action( 'woocommerce_before_single_product' );
 
-<?php
-	/**
-	 * woocommerce_before_single_product hook
-	 *
-	 * @hooked wc_print_notices - 10
-	 */
-	 do_action( 'woocommerce_before_single_product' );
+ if ( post_password_required() ) :
 
-	 if ( post_password_required() ) :
+ 	echo get_the_password_form();
 
-	 	echo get_the_password_form();
+	return;
 
-		return;
+endif;
 
-	endif;
+echo beans_open_markup( 'woo_product_single_wrap', 'div', array( 'itemscope' => '', 'itemtype' => woocommerce_get_product_schema(), 'id' => 'product-' . the_ID(), 'class' => implode(' ', post_class() ) ) );
 
-?>
+#TODO Double check
 
-<?php echo beans_open_markup( 'woo_product_single_wrap', 'div', array( 'itemscope' => '', 'itemtype' => woocommerce_get_product_schema(), 'id' => 'product-' . the_ID(), 'class' => implode(' ', post_class() ) ) ); ?>
-
-<?php #TODO Double check ?>
-
-	<?php
 		/**
 		 * woocommerce_before_single_product_summary hook
 		 *
@@ -43,11 +37,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		 * @hooked woocommerce_show_product_images - 20
 		 */
 		do_action( 'woocommerce_before_single_product_summary' );
-	?>
 
-	<?php echo beans_open_markup( 'woo_product_single_summary', 'div', array( 'class' => 'summary entry-summary' ) ); ?>
+	echo beans_open_markup( 'woo_product_single_summary', 'div', array( 'class' => 'summary entry-summary' ) );
 
-		<?php
 			/**
 			 * woocommerce_single_product_summary hook
 			 *
@@ -60,11 +52,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			 * @hooked woocommerce_template_single_sharing - 50
 			 */
 			do_action( 'woocommerce_single_product_summary' );
-		?>
 
-	<?php echo beans_close_markup( 'woo_product_single_summary', 'div' ); ?>
+	echo beans_close_markup( 'woo_product_single_summary', 'div' );
 
-	<?php
 		/**
 		 * woocommerce_after_single_product_summary hook
 		 *
@@ -73,10 +63,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		 * @hooked woocommerce_output_related_products - 20
 		 */
 		do_action( 'woocommerce_after_single_product_summary' );
-	?>
 
-	<?php echo beans_selfclose_markup( 'woo_product_single_meta_url', 'meta', array( 'itemprop' => 'url', 'content' => the_permalink() ) ); ?>
+	echo beans_selfclose_markup( 'woo_product_single_meta_url', 'meta', array( 'itemprop' => 'url', 'content' => the_permalink() ) );
 
-<?php echo beans_close_markup( 'woo_product_single_wrap', 'div' ); ?><!-- #product-<?php the_ID(); ?> -->
+echo beans_close_markup( 'woo_product_single_wrap', 'div' ); echo '<!-- #product-the_ID(); ?> -->';
 
-<?php do_action( 'woocommerce_after_single_product' ); ?>
+do_action( 'woocommerce_after_single_product' );
