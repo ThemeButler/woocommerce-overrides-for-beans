@@ -7,109 +7,240 @@
  * @version     2.2.6
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
+wc_print_notices();
 
-<?php wc_print_notices(); ?>
+do_action( 'woocommerce_before_customer_login_form' );
 
-<?php do_action( 'woocommerce_before_customer_login_form' ); ?>
+	if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) :
 
-<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
+		echo beans_open_markup( 'woo_customer_login', 'div', array(
+			'class' => 'col2-set',
+			'id' => 'customer_login'
+		) );
 
-<div class="col2-set" id="customer_login">
+			echo beans_open_markup( 'woo_customer_login_col1', 'div', array( 'class' => 'col-1' ) );
 
-	<div class="col-1">
+	endif;
 
-<?php endif; ?>
+		echo beans_open_markup( 'woo_customer_login_title', 'h2' );
 
-		<h2><?php _e( 'Login', 'woocommerce' ); ?></h2>
+			_e( 'Login', 'woocommerce' );
 
-		<form method="post" class="login">
+		echo beans_close_markup( 'woo_customer_login_title', 'h2' );
 
-			<?php do_action( 'woocommerce_login_form_start' ); ?>
+		echo beans_open_markup( 'woo_customer_login_form', 'form', array(
+			'method' => 'post',
+			'class' => 'login'
+		) );
 
-			<p class="form-row form-row-wide">
-				<label for="username"><?php _e( 'Username or email address', 'woocommerce' ); ?> <span class="required">*</span></label>
-				<input type="text" class="input-text" name="username" id="username" value="<?php if ( ! empty( $_POST['username'] ) ) echo esc_attr( $_POST['username'] ); ?>" />
-			</p>
-			<p class="form-row form-row-wide">
-				<label for="password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
-				<input class="input-text" type="password" name="password" id="password" />
-			</p>
+			do_action( 'woocommerce_login_form_start' );
 
-			<?php do_action( 'woocommerce_login_form' ); ?>
+			echo beans_open_markup( 'woo_customer_login_username', 'p', array( 'class' => 'form-row form-row-wide' ) );
 
-			<p class="form-row">
-				<?php wp_nonce_field( 'woocommerce-login' ); ?>
-				<input type="submit" class="button" name="login" value="<?php esc_attr_e( 'Login', 'woocommerce' ); ?>" />
-				<label for="rememberme" class="inline">
-					<input name="rememberme" type="checkbox" id="rememberme" value="forever" /> <?php _e( 'Remember me', 'woocommerce' ); ?>
-				</label>
-			</p>
-			<p class="lost_password">
-				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?', 'woocommerce' ); ?></a>
-			</p>
+				echo beans_open_markup( 'woo_customer_login_username_label', 'label', array( 'for' => 'username' ) );
 
-			<?php do_action( 'woocommerce_login_form_end' ); ?>
+					_e( 'Username or email address', 'woocommerce' );
 
-		</form>
+					echo beans_open_markup( 'woo_account_edit_form_required', 'span', array( 'class' => 'required' ) ) . beans_close_markup( 'woo_account_edit_form_required', 'span' );
 
-<?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) : ?>
+				echo beans_close_markup( 'woo_customer_login_username_label', 'label' );
 
-	</div>
+				echo beans_selfclose_markup( 'woo_customer_login_username_input', 'input', array(
+					'type' => 'text',
+					'class' => 'input-text',
+					'name' => 'username',
+					'id' => 'username',
+					'value' => ! empty( $_POST['username'] ) ? esc_attr( $_POST['username'] : null )
+				) );
 
-	<div class="col-2">
+			echo beans_close_markup( 'woo_customer_login_username', 'p' );
 
-		<h2><?php _e( 'Register', 'woocommerce' ); ?></h2>
+			echo beans_open_markup( 'woo_customer_login_password', 'p', array( 'class' => 'form-row form-row-wide' ) );
 
-		<form method="post" class="register">
+				echo beans_open_markup( 'woo_customer_login_password_label', 'label', array( 'for' => 'username' ) );
 
-			<?php do_action( 'woocommerce_register_form_start' ); ?>
+					_e( 'Password', 'woocommerce' );
 
-			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+					echo beans_open_markup( 'woo_account_edit_form_required', 'span', array( 'class' => 'required' ) ) . beans_close_markup( 'woo_account_edit_form_required', 'span' );
 
-				<p class="form-row form-row-wide">
-					<label for="reg_username"><?php _e( 'Username', 'woocommerce' ); ?> <span class="required">*</span></label>
-					<input type="text" class="input-text" name="username" id="reg_username" value="<?php if ( ! empty( $_POST['username'] ) ) echo esc_attr( $_POST['username'] ); ?>" />
-				</p>
+				echo beans_close_markup( 'woo_customer_login_password_label', 'label' );
 
-			<?php endif; ?>
+				echo beans_selfclose_markup( 'woo_customer_login_password_input', 'input', array(
+					'type' => 'password',
+					'class' => 'input-text',
+					'name' => 'password',
+					'id' => 'password'
+				) );
 
-			<p class="form-row form-row-wide">
-				<label for="reg_email"><?php _e( 'Email address', 'woocommerce' ); ?> <span class="required">*</span></label>
-				<input type="email" class="input-text" name="email" id="reg_email" value="<?php if ( ! empty( $_POST['email'] ) ) echo esc_attr( $_POST['email'] ); ?>" />
-			</p>
+			echo beans_close_markup( 'woo_customer_login_password', 'p' );
 
-			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+			do_action( 'woocommerce_login_form' );
 
-				<p class="form-row form-row-wide">
-					<label for="reg_password"><?php _e( 'Password', 'woocommerce' ); ?> <span class="required">*</span></label>
-					<input type="password" class="input-text" name="password" id="reg_password" />
-				</p>
+			echo beans_open_markup( 'woo_customer_login_submit', 'p', array( 'class' => 'form-row' ) );
 
-			<?php endif; ?>
+				wp_nonce_field( 'woocommerce-login' );
 
-			<!-- Spam Trap -->
-			<div style="<?php echo ( ( is_rtl() ) ? 'right' : 'left' ); ?>: -999em; position: absolute;"><label for="trap"><?php _e( 'Anti-spam', 'woocommerce' ); ?></label><input type="text" name="email_2" id="trap" tabindex="-1" /></div>
+				echo beans_selfclose_markup( 'woo_customer_login_submit_input', 'input', array(
+					'type' => 'submit',
+					'class' => 'button',
+					'name' => 'login',
+					'value' => esc_attr_e( 'Login', 'woocommerce' )
+				) );
 
-			<?php do_action( 'woocommerce_register_form' ); ?>
-			<?php do_action( 'register_form' ); ?>
+				echo beans_open_markup( 'woo_customer_login_submit_remember_label', 'label', array(
+					'for' => 'rememberme',
+					'class' => 'inline'
+				) );
 
-			<p class="form-row">
-				<?php wp_nonce_field( 'woocommerce-register' ); ?>
-				<input type="submit" class="button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>" />
-			</p>
+				echo beans_selfclose_markup( 'woo_customer_login_remember_input', 'input', array(
+					'name' => 'rememberme',
+					'type' => 'checkbox',
+					'id' => 'rememberme',
+					'value' => 'forever'
+				) );
 
-			<?php do_action( 'woocommerce_register_form_end' ); ?>
+				_e( 'Remember me', 'woocommerce' );
 
-		</form>
+				echo beans_close_markup( 'woo_customer_login_submit_remember_label', 'label' );
 
-	</div>
+			echo beans_close_markup( 'woo_edit_address_submit', 'p' );
 
-</div>
-<?php endif; ?>
 
-<?php do_action( 'woocommerce_after_customer_login_form' ); ?>
+			echo beans_open_markup( 'woo_customer_login_lost_password', 'p', array( 'class' => 'lost_password' ) );
+
+				echo beans_open_markup( 'woo_customer_login_lost_password_link', 'a', array( 'href' => esc_url( wp_lostpassword_url() ) ) );
+
+					_e( 'Lost your password?', 'woocommerce' );
+
+				echo beans_close_markup( 'woo_customer_login_lost_password_link', 'a' );
+
+			echo beans_close_markup( 'woo_customer_login_lost_password', 'p' );
+
+			do_action( 'woocommerce_login_form_end' );
+
+		echo beans_close_markup( 'woo_customer_login_form', 'form' );
+
+if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) :
+
+	echo beans_close_markup( 'woo_customer_login_col1', 'div' );
+
+	echo beans_open_markup( 'woo_customer_registration_col2', 'div', array( 'class' => 'col-2' ) );
+
+		echo beans_open_markup( 'woo_customer_registration_title', 'h2' );
+
+			_e( 'Register', 'woocommerce' );
+
+		echo beans_close_markup( 'woo_customer_registration_title', 'h2' );
+
+		echo beans_open_markup( 'woo_customer_registration_form', 'form', array(
+			'method' => 'post',
+			'class' => 'register'
+		) );
+
+			do_action( 'woocommerce_register_form_start' );
+
+			if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) :
+
+				echo beans_open_markup( 'woo_customer_registration_username', 'p', array( 'class' => 'form-row form-row-wide' ) );
+
+					echo beans_open_markup( 'woo_customer_registration_username_label', 'label', array( 'for' => 'reg_username' ) );
+
+						_e( 'Username', 'woocommerce' );
+
+						echo beans_open_markup( 'woo_customer_registration_required', 'span', array( 'class' => 'required' ) ) . beans_close_markup( 'woo_customer_registration_required', 'span' );
+
+					echo beans_close_markup( 'woo_customer_registration_username_label', 'label' );
+
+					echo beans_selfclose_markup( 'woo_customer_registration_username_input', 'input', array(
+						'type' => 'text',
+						'class' => 'input-text',
+						'name' => 'username',
+						'id' => 'reg_username',
+						'value' => ! empty( $_POST['username'] ) ? esc_attr( $_POST['username'] ) : null
+					) );
+
+				echo beans_close_markup( 'woo_customer_registration_username', 'p' );
+
+			endif;
+
+			echo beans_open_markup( 'woo_customer_registration_email', 'p', array( 'class' => 'form-row form-row-wide' ) );
+
+				echo beans_open_markup( 'woo_customer_registration_email_label', 'label', array( 'for' => 'reg_email' ) );
+
+					_e( 'Email address', 'woocommerce' );
+
+					echo beans_open_markup( 'woo_customer_registration_required', 'span', array( 'class' => 'required' ) ) . beans_close_markup( 'woo_customer_registration_required', 'span' );
+
+				echo beans_close_markup( 'woo_customer_registration_email_label', 'label' );
+
+				echo beans_selfclose_markup( 'woo_customer_registration_email_input', 'input', array( 'type' => 'text', 'class' => 'input-text', 'name' => 'email', 'id' => 'reg_email', 'value' => if ( ! empty( $_POST['email'] ) ) echo esc_attr( $_POST['email'] ) ) );
+
+			echo beans_close_markup( 'woo_customer_registration_email', 'p' );
+
+			if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) :
+
+				echo beans_open_markup( 'woo_customer_registration_password', 'p', array( 'class' => 'form-row form-row-wide' ) );
+
+					echo beans_open_markup( 'woo_customer_registration_password_label', 'label', array( 'for' => 'reg_password' ) );
+
+						_e( 'Password', 'woocommerce' );
+
+						echo beans_open_markup( 'woo_customer_registration_required', 'span', array( 'class' => 'required' ) ) . beans_close_markup( 'woo_customer_registration_required', 'span' );
+
+					echo beans_close_markup( 'woo_customer_registration_password_label', 'label' );
+
+					echo beans_selfclose_markup( 'woo_customer_registration_password_input', 'input', array( 'type' => 'password', 'class' => 'input-text', 'name' => 'password', 'id' => 'reg_password' ) );
+
+				echo beans_close_markup( 'woo_customer_registration_password', 'p' );
+
+			endif;
+
+			echo '<!-- Spam Trap -->';
+			echo beans_open_markup( 'woo_customer_registration_spam_trap', 'div', array(
+				'style' => ( ( is_rtl() ) ? 'right' : 'left' ) . ': -999em; position: absolute'
+			) );
+
+				echo beans_open_markup( 'woo_customer_registration_spam_trap_label', 'label', array( 'for' => 'trap' ) );
+
+					_e( 'Anti-spam', 'woocommerce' );
+
+				echo beans_close_markup( 'woo_customer_registration_spam_trap_label', 'label' );
+
+				echo beans_selfclose_markup( 'woo_customer_registration_spam_trap_input', 'input', array(
+					'type' => 'text',
+					'name' => 'email_2',
+					'tabindex' => -1
+				) );
+
+			echo beans_close_markup( 'woo_customer_registration_spam_trap', 'div' );
+
+			do_action( 'woocommerce_register_form' );
+
+			do_action( 'register_form' );
+
+			echo beans_open_markup( 'woo_customer_registration_submit', 'p', array( 'class' => 'form-row' ) );
+
+				wp_nonce_field( 'woocommerce-register' );
+
+				echo beans_selfclose_markup( 'woo_customer_registration_submit_input', 'input', array(
+					'type' => 'submit',
+					'class' => 'button',
+					'name' => 'register',
+					'value' => esc_attr_e( 'Register', 'woocommerce' )
+				) );
+
+			echo beans_close_markup( 'woo_customer_registration_submit', 'p' );
+
+			do_action( 'woocommerce_register_form_end' );
+
+		echo beans_close_markup( 'woo_customer_registration_form', 'form' );
+
+	echo beans_close_markup( 'woo_customer_registration_col2', 'div' );
+
+echo beans_close_markup( 'woo_customer_login', 'div' );
+
+endif;
+
+do_action( 'woocommerce_after_customer_login_form' );
