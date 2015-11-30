@@ -7,9 +7,7 @@
  * @version     2.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 ?>
 
@@ -22,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php echo beans_close_markup( 'woo_emails_customer_processing_notice', 'p' ); ?>
 
 <?php do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text ); ?>
-
 
 <?php echo beans_open_markup( 'woo_emails_customer_processing_title', 'h2' ); ?>
 
