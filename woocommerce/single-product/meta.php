@@ -7,30 +7,41 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post, $product;
 
 $cat_count = sizeof( get_the_terms( $post->ID, 'product_cat' ) );
+
 $tag_count = sizeof( get_the_terms( $post->ID, 'product_tag' ) );
 
-?>
-<div class="product_meta">
+echo beans_open_markup( 'woo_single_meta_wrap', 'div', array( 'class' => 'product_meta' ) );
 
-	<?php do_action( 'woocommerce_product_meta_start' ); ?>
+	do_action( 'woocommerce_product_meta_start' );
 
-	<?php if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) : ?>
+	if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) :
 
-		<span class="sku_wrapper"><?php _e( 'SKU:', 'woocommerce' ); ?> <span class="sku" itemprop="sku"><?php echo ( $sku = $product->get_sku() ) ? $sku : __( 'N/A', 'woocommerce' ); ?></span></span>
+		echo beans_open_markup( 'woo_single_meta_sku_wrap', 'span', array( 'class' => 'sku_wrapper' ) );
 
-	<?php endif; ?>
+			_e( 'SKU:', 'woocommerce' );
 
-	<?php echo $product->get_categories( ', ', '<span class="posted_in">' . _n( 'Category:', 'Categories:', $cat_count, 'woocommerce' ) . ' ', '</span>' ); ?>
+			echo beans_open_markup( 'woo_single_meta_sku', 'span', array(
+				'class' => 'sku',
+				'itemprop' => 'sku'
+			) );
 
-	<?php echo $product->get_tags( ', ', '<span class="tagged_as">' . _n( 'Tag:', 'Tags:', $tag_count, 'woocommerce' ) . ' ', '</span>' ); ?>
+				echo ( $sku = $product->get_sku() ) ? $sku : __( 'N/A', 'woocommerce' );
 
-	<?php do_action( 'woocommerce_product_meta_end' ); ?>
+			echo beans_close_markup( 'woo_single_meta_sku', 'span' );
 
-</div>
+		echo beans_close_markup( 'woo_single_meta_sku_wrap', 'span' );
+
+	endif;
+
+	echo $product->get_categories( ', ', beans_open_markup( 'woo_single_meta_category', 'span', array( 'class' => 'posted_in' ) ) . _n( 'Category:', 'Categories:', $cat_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_category', 'span' ) );
+
+	echo $product->get_tags( ', ', beans_open_markup( 'woo_single_meta_tags', 'span', array( 'class' => 'tagged_as' ) ) . _n( 'Tag:', 'Tags:', $tag_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_tags', 'span' ) ) );
+
+	do_action( 'woocommerce_product_meta_end' );
+
+echo beans_close_markup( 'woo_single_meta_wrap', 'div' );
