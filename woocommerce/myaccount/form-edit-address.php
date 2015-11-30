@@ -7,9 +7,7 @@
  * @version     2.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $current_user;
 
@@ -17,36 +15,51 @@ $page_title = ( $load_address === 'billing' ) ? __( 'Billing Address', 'woocomme
 
 get_currentuserinfo();
 
-?>
+wc_print_notices();
 
-<?php wc_print_notices(); ?>
+if ( ! $load_address ) :
 
-<?php if ( ! $load_address ) : ?>
+	wc_get_template( 'myaccount/my-address.php' );
 
-	<?php wc_get_template( 'myaccount/my-address.php' ); ?>
+else :
 
-<?php else : ?>
+	echo beans_open_markup( 'woo_edit_address_form', 'form', array( 'method' => 'post' ) );
 
-	<form method="post">
+		echo beans_open_markup( 'woo_edit_address_title', 'h3' );
 
-		<h3><?php echo apply_filters( 'woocommerce_my_account_edit_address_title', $page_title ); ?></h3>
+			echo apply_filters( 'woocommerce_my_account_edit_address_title', $page_title );
 
-		<?php do_action( "woocommerce_before_edit_address_form_{$load_address}" ); ?>
+		echo beans_close_markup( 'woo_edit_address_title', 'h3' );
 
-		<?php foreach ( $address as $key => $field ) : ?>
+		do_action( "woocommerce_before_edit_address_form_{$load_address}" );
 
-			<?php woocommerce_form_field( $key, $field, ! empty( $_POST[ $key ] ) ? wc_clean( $_POST[ $key ] ) : $field['value'] ); ?>
+		foreach ( $address as $key => $field ) :
 
-		<?php endforeach; ?>
+			woocommerce_form_field( $key, $field, ! empty( $_POST[ $key ] ) ? wc_clean( $_POST[ $key ] ) : $field['value'] );
 
-		<?php do_action( "woocommerce_after_edit_address_form_{$load_address}" ); ?>
+		endforeach;
 
-		<p>
-			<input type="submit" class="button" name="save_address" value="<?php esc_attr_e( 'Save Address', 'woocommerce' ); ?>" />
-			<?php wp_nonce_field( 'woocommerce-edit_address' ); ?>
-			<input type="hidden" name="action" value="edit_address" />
-		</p>
+		do_action( "woocommerce_after_edit_address_form_{$load_address}" );
 
-	</form>
+		echo beans_open_markup( 'woo_edit_address_submit', 'p' );
 
-<?php endif; ?>
+			echo beans_selfclose_markup( 'woo_edit_address_submit_input', 'input', array(
+				'type' => 'submit',
+				'class' => 'button',
+				'name' => 'save_address',
+				'value' => esc_attr_e( 'Save Address', 'woocommerce' )
+			) );
+
+			wp_nonce_field( 'woocommerce-edit_address' );
+
+			echo beans_selfclose_markup( 'woo_edit_address_hidden_input', 'input', array(
+				'type' => 'hidden',
+				'name' => 'action',
+				'value' => 'edit_address'
+			) );
+
+		echo beans_close_markup( 'woo_edit_address_submit', 'p' );
+
+	echo beans_close_markup( 'woo_edit_address_form', 'form' );
+
+endif;
