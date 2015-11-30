@@ -7,18 +7,20 @@
  * @version     2.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post;
 
 $heading = esc_html( apply_filters( 'woocommerce_product_description_heading', __( 'Product Description', 'woocommerce' ) ) );
 
-?>
+if ( $heading ) :
 
-<?php if ( $heading ): ?>
-  <h2><?php echo $heading; ?></h2>
-<?php endif; ?>
+	echo beans_open_markup( 'woo_tabs_description_title', 'h2' );
 
-<?php the_content(); ?>
+		echo $heading;
+
+	echo beans_close_markup( 'woo_tabs_description_title', 'h2' );
+
+endif;
+
+the_content();
