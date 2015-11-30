@@ -31,28 +31,28 @@ $products = new WP_Query( $args );
 
 $woocommerce_loop['columns'] = apply_filters( 'woocommerce_cross_sells_columns', $columns );
 
-if ( $products->have_posts() ) : ?>
+if ( $products->have_posts() ) :
 
-	<?php echo beans_open_markup( 'woo_cart_cross_sells', 'div', array( 'class' => 'cross-sells' ) ); ?>
+	echo beans_open_markup( 'woo_cart_cross_sells', 'div', array( 'class' => 'cross-sells' ) );
 
-		<?php echo beans_open_markup( 'woo_cart_cross_sells_title', 'h2', array( 'class' => 'page-title' ) ); ?>
+		echo beans_open_markup( 'woo_cart_cross_sells_title', 'h2', array( 'class' => 'page-title' ) );
 
-			<?php _e( 'You may be interested in&hellip;', 'woocommerce' ) ?>
+			_e( 'You may be interested in&hellip;', 'woocommerce' )
 
-		<?php echo beans_close_markup( 'woo_cart_cross_sells_title', 'h2' ); ?>
+		echo beans_close_markup( 'woo_cart_cross_sells_title', 'h2' );
 
-		<?php woocommerce_product_loop_start(); ?>
+		woocommerce_product_loop_start();
 
-			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+			while ( $products->have_posts() ) : $products->the_post();
 
-				<?php wc_get_template_part( 'content', 'product' ); ?>
+				wc_get_template_part( 'content', 'product' );
 
-			<?php endwhile; // end of the loop. ?>
+			endwhile; // end of the loop.
 
-		<?php woocommerce_product_loop_end(); ?>
+		woocommerce_product_loop_end();
 
-	<?php echo beans_close_markup( 'woo_cart_cross_sells', 'div' ); ?>
+	echo beans_close_markup( 'woo_cart_cross_sells', 'div' );
 
-<?php endif;
+endif;
 
 wp_reset_query();
