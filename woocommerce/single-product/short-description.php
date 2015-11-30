@@ -7,17 +7,18 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post;
 
-if ( ! $post->post_excerpt ) {
-	return;
-}
+if ( ! $post->post_excerpt ) :
 
-?>
-<div itemprop="description">
-	<?php echo apply_filters( 'woocommerce_short_description', $post->post_excerpt ) ?>
-</div>
+	return;
+
+endif;
+
+echo beans_open_markup( 'woo_single_short_description', 'div', array( 'itemprop' => 'description' ) );
+
+	echo apply_filters( 'woo_single_short_description', $post->post_excerpt )
+
+echo beans_close_markup( 'woo_single_short_description', 'div' );
