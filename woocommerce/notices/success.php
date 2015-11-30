@@ -7,16 +7,20 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! $messages ){
-	return;
-}
+ if ( ! $messages ) :
 
-?>
+ 	return;
 
-<?php foreach ( $messages as $message ) : ?>
-	<div class="woocommerce-message"><?php echo wp_kses_post( $message ); ?></div>
-<?php endforeach; ?>
+ endif;
+
+foreach ( $messages as $message ) :
+
+	echo beans_open_markup( 'woo_message_wrap', 'div', array( 'class' => 'woocommerce-message' ) );
+
+		echo wp_kses_post( $message );
+
+	echo beans_close_markup( 'woo_message_wrap', 'div' );
+
+endforeach;
