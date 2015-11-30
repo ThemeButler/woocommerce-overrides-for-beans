@@ -9,79 +9,77 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
+do_action( 'woocommerce_auth_page_header' );
 
-<?php do_action( 'woocommerce_auth_page_header' ); ?>
+echo beans_open_markup( 'woo_auth_access_title', 'h1' );
 
-<?php echo beans_open_markup( 'woo_auth_access_title', 'h1' ); ?>
+	printf( __( '%s would like to connect to your store' , 'woocommerce' ), esc_html( $app_name ) );
 
-	<?php printf( __( '%s would like to connect to your store' , 'woocommerce' ), esc_html( $app_name ) ); ?>
+echo beans_close_markup( 'woo_auth_access_title', 'h1' );
 
-<?php echo beans_close_markup( 'woo_auth_access_title', 'h1' ); ?>
+wc_print_notices();
 
-<?php wc_print_notices(); ?>
+echo beans_open_markup( 'woo_auth_access_notice', 'p' );
 
-<?php echo beans_open_markup( 'woo_auth_access_notice', 'p' ); ?>
+	printf( __( 'This will give "%s" ' . beans_open_markup( 'woo_auth_access_notice_name', 'strong' ) . '%s' . beans_close_markup( 'woo_auth_access_notice_name', 'strong' ) . ' access which will allow it to:' , 'woocommerce' ), esc_html( $app_name ), esc_html( $scope ) );
 
-	<?php printf( __( 'This will give "%s" <strong>%s</strong> access which will allow it to:' , 'woocommerce' ), esc_html( $app_name ), esc_html( $scope ) ); ?>
+echo beans_close_markup( 'woo_auth_access_notice', 'p' );
 
-<?php echo beans_close_markup( 'woo_auth_access_notice', 'p' ); ?>
+echo beans_open_markup( 'woo_auth_permissions_list', 'ul', array( 'class' => 'wc-auth-permissions' ) );
 
-<?php echo beans_open_markup( 'woo_auth_permissions_list', 'ul', array( 'class' => 'wc-auth-permissions' ) ); ?>
+	foreach ( $permissions as $permission ) :
 
-	<?php foreach ( $permissions as $permission ) : ?>
+		echo beans_open_markup( 'woo_auth_permissions_list_item', 'li' );
 
-		<?php echo beans_open_markup( 'woo_auth_permissions_list_item', 'li' ); ?>
+			echo esc_html( $permission );
 
-			<?php echo esc_html( $permission ); ?>
+		echo beans_close_markup( 'woo_auth_permissions_list_item', 'li' );
 
-		<?php echo beans_close_markup( 'woo_auth_permissions_list_item', 'li' ); ?>
+	endforeach;
 
-	<?php endforeach; ?>
+echo beans_close_markup( 'woo_auth_permissions_list', 'ul' );
 
-<?php echo beans_close_markup( 'woo_auth_permissions_list', 'ul' ); ?>
+echo beans_open_markup( 'woo_auth_logged_in_as_wrap', 'div', array( 'class' => 'wc-auth-logged-in-as' ) );
 
-<?php echo beans_open_markup( 'woo_auth_logged_in_as_wrap', 'div', array( 'class' => 'wc-auth-logged-in-as' ) ); ?>
+	echo get_avatar( $user->ID, 70 );
 
-	<?php echo get_avatar( $user->ID, 70 ); ?>
+	echo beans_open_markup( 'woo_auth_logged_in_as_p', 'p' );
 
-	<?php echo beans_open_markup( 'woo_auth_logged_in_as_p', 'p' ); ?>
+		printf( __( 'Logged in as %s', 'woocommerce' ), esc_html( $user->display_name ) );
 
-		<?php printf( __( 'Logged in as %s', 'woocommerce' ), esc_html( $user->display_name ) ); ?>
-
-		<?php echo beans_open_markup( 'woo_auth_logout_link', 'a', array(
+		echo beans_open_markup( 'woo_auth_logout_link', 'a', array(
 			'href' => esc_url( $logout_url ),
 			'class' => 'wc-auth-logout'
-		) ); ?>
+		) );
 
-			<?php _e( 'Logout', 'woocommerce' ); ?>
+			_e( 'Logout', 'woocommerce' );
 
-		<?php echo beans_close_markup( 'woo_auth_logout_link', 'a' ); ?>
+		echo beans_close_markup( 'woo_auth_logout_link', 'a' );
 
-	<?php echo beans_close_markup( 'woo_auth_logged_in_as_p', 'p' ); ?>
+	echo beans_close_markup( 'woo_auth_logged_in_as_p', 'p' );
 
-<?php echo beans_close_markup( 'woo_auth_logged_in_as_wrap', 'div' ); ?>
+echo beans_close_markup( 'woo_auth_logged_in_as_wrap', 'div' );
 
-<?php echo beans_open_markup( 'woo_auth_actions_wrap', 'p', array( 'class' => 'wc-auth-actions' ) ); ?>
+echo beans_open_markup( 'woo_auth_actions_wrap', 'p', array( 'class' => 'wc-auth-actions' ) );
 
-	<?php echo beans_open_markup( 'woo_auth_actions_approve_link', 'a', array(
+	echo beans_open_markup( 'woo_auth_actions_approve_link', 'a', array(
 		'href' => esc_url( $granted_url ),
 		'class' => 'button button-primary wc-auth-approve'
-	) ); ?>
+	) );
 
-		<?php _e( 'Approve', 'woocommerce' ); ?>
+		_e( 'Approve', 'woocommerce' );
 
-	<?php echo beans_close_markup( 'woo_auth_actions_approve_link', 'a' ); ?>
+	echo beans_close_markup( 'woo_auth_actions_approve_link', 'a' );
 
-	<?php echo beans_open_markup( 'woo_auth_actions_deny_link', 'a', array(
+	echo beans_open_markup( 'woo_auth_actions_deny_link', 'a', array(
 		'href' => esc_url( $return_url ),
 		'class' => 'button wc-auth-deny'
-	) ); ?>
+	) );
 
-		<?php _e( 'Deny', 'woocommerce' ); ?>
+		_e( 'Deny', 'woocommerce' );
 
-	<?php echo beans_close_markup( 'woo_auth_actions_deny_link', 'a' ); ?>
+	echo beans_close_markup( 'woo_auth_actions_deny_link', 'a' );
 
-<?php echo beans_close_markup( 'woo_auth_actions_wrap', 'p' ); ?>
+echo beans_close_markup( 'woo_auth_actions_wrap', 'p' );
 
-<?php do_action( 'woocommerce_auth_page_footer' ); ?>
+do_action( 'woocommerce_auth_page_footer' );
