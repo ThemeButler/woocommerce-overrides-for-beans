@@ -7,14 +7,18 @@
  * @version     2.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product;
 
 echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-	sprintf( '<a href="%s" rel="nofollow" data-product_id="%s" data-product_sku="%s" data-quantity="%s" class="button %s product_type_%s">%s</a>',
+    sprintf( beans_open_markup( 'woo_add_to_cart_link', 'a', array(
+        'href' => '%s',
+        'rel' => 'nofollow',
+        'data-product_id' => '%s',
+        'data-product_sku' => '%s',
+        'data-quantity' => '%s',
+        'class' => 'button %s product_type_%s' . '%s' . beans_close_markup( 'woo_add_to_cart_link', 'a' ),
 		esc_url( $product->add_to_cart_url() ),
 		esc_attr( $product->id ),
 		esc_attr( $product->get_sku() ),
