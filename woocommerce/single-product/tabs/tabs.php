@@ -7,9 +7,7 @@
  * @version 2.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Filter tabs and allow third parties to add their own
@@ -17,23 +15,44 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Each tab is an array containing title, callback and priority.
  * @see woocommerce_default_product_tabs()
  */
+
 $tabs = apply_filters( 'woocommerce_product_tabs', array() );
 
-if ( ! empty( $tabs ) ) : ?>
+if ( ! empty( $tabs ) ) :
 
-	<div class="woocommerce-tabs wc-tabs-wrapper">
-		<ul class="tabs wc-tabs">
-			<?php foreach ( $tabs as $key => $tab ) : ?>
-				<li class="<?php echo esc_attr( $key ); ?>_tab">
-					<a href="#tab-<?php echo esc_attr( $key ); ?>"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></a>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-		<?php foreach ( $tabs as $key => $tab ) : ?>
-			<div class="panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>">
-				<?php call_user_func( $tab['callback'], $key, $tab ); ?>
-			</div>
-		<?php endforeach; ?>
-	</div>
+	echo beans_open_markup( 'woo_tabs_menu_wrap', 'div', array( 'class' => 'woocommerce-tabs wc-tabs-wrapper' ) );
 
-<?php endif; ?>
+		echo beans_open_markup( 'woo_tabs_menu_wrap_list', 'ul', array( 'class' => 'tabs wc-tabs' ) );
+
+			foreach ( $tabs as $key => $tab ) :
+
+				echo beans_open_markup( 'woo_tabs_menu_wrap_list_item', 'li', array( 'class' => esc_attr( $key ) ) );
+
+					echo beans_open_markup( 'woo_tabs_menu_wrap_list_item_link', 'a', array( 'href' => '#tab-' . esc_attr( $key ) ) );
+
+						echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key );
+
+					echo beans_close_markup( 'woo_tabs_menu_wrap_list_item_link', 'a' );
+
+				echo beans_close_markup( 'woo_tabs_menu_wrap_list_item', 'li' );
+
+			endforeach;
+
+		echo beans_close_markup( 'woo_tabs_menu_wrap_list', 'ul' );
+
+		foreach ( $tabs as $key => $tab ) :
+
+			echo beans_open_markup( 'woo_tabs_panel_' . esc_attr( $key ), 'div', array(
+				'class' => 'panel entry-content wc-tab',
+				'id' => 'tab-' . esc_attr( $key )
+			) );
+
+				call_user_func( $tab['callback'], $key, $tab );
+
+			echo beans_close_markup( 'woo_tabs_panel_' . esc_attr( $key ), 'div' );
+
+		endforeach;
+
+	echo beans_close_markup( 'woo_tabs_menu_wrap', 'div' );
+
+endif;
