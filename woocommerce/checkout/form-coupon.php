@@ -15,44 +15,45 @@ if ( ! WC()->cart->coupons_enabled() ) :
 
 endif;
 
-$info_message = apply_filters( 'woocommerce_checkout_coupon_message', __( 'Have a coupon?', 'woocommerce' ) . beans_open_markup( 'woo_cart_coupon_form_login_link', 'a', array( 'href' => '#', 'class' => 'showcoupon' ) ) . __( 'Click here to enter your code', 'woocommerce' ) . beans_close_markup( 'woo_cart_coupon_form_login_link', 'a' ) );
+$info_message = apply_filters( 'woocommerce_checkout_coupon_message', __( 'Have a coupon?', 'woocommerce' ) . beans_open_markup( 'woo_cart_coupon_form_login_link', 'a', array(
+	'href' => '#',
+	'class' => 'showcoupon'
+) ) . __( 'Click here to enter your code', 'woocommerce' ) . beans_close_markup( 'woo_cart_coupon_form_login_link', 'a' ) );
 
 wc_print_notice( $info_message, 'notice' );
 
-?>
-
-<?php echo beans_open_markup( 'woo_checkout_coupon', 'form', array(
+echo beans_open_markup( 'woo_checkout_coupon', 'form', array(
 	'class' => 'checkout_coupon',
 	'method' => 'post',
 	'style' => 'display:none;'
-) ); ?>
+) );
 
-	<?php echo beans_open_markup( 'woo_checkout_coupon_code', 'p', array( 'class' => 'form-row form-row-first' ) ); ?>
+	echo beans_open_markup( 'woo_checkout_coupon_code', 'p', array( 'class' => 'form-row form-row-first' ) );
 
-		<?php echo beans_selfclose_markup( 'woo_checkout_coupon_code_input', 'input', array(
+		echo beans_selfclose_markup( 'woo_checkout_coupon_code_input', 'input', array(
 			'type' => 'text',
 			'name' => 'coupon_code',
 			'class' => 'input-text',
 			'placeholder' => esc_attr_e( 'Coupon code', 'woocommerce' ),
 			'id' => 'coupon_code',
 			'value' => ''
-		) ); ?>
+		) );
 
-	<?php echo beans_close_markup( 'woo_checkout_coupon_code', 'p' ); ?>
+	echo beans_close_markup( 'woo_checkout_coupon_code', 'p' );
 
-	<?php echo beans_open_markup( 'woo_checkout_coupon_apply', 'p', array( 'class' => 'form-row form-row-last' ) ); ?>
+	echo beans_open_markup( 'woo_checkout_coupon_apply', 'p', array( 'class' => 'form-row form-row-last' ) );
 
-		<?php echo beans_selfclose_markup( 'woo_checkout_coupon_apply_input', 'input', array(
+		echo beans_selfclose_markup( 'woo_checkout_coupon_apply_input', 'input', array(
 			'type' => 'submit',
 			'class' => 'button',
 			'name' => 'apply_coupon',
 			'value' => esc_attr_e( 'Apply Coupon', 'woocommerce' )
-		) ); ?>
+		) );
 
-	<?php echo beans_close_markup( 'woo_checkout_coupon_apply', 'p' ); ?>
+	echo beans_close_markup( 'woo_checkout_coupon_apply', 'p' );
 
-	<?php echo beans_open_markup( 'woo_checkout_coupon_clear', 'div', array( 'class' => 'clear' ) ); ?>
+	echo beans_open_markup( 'woo_checkout_coupon_clear', 'div', array( 'class' => 'clear' ) );
 
-	<?php echo beans_close_markup( 'woo_checkout_coupon_clear', 'div' ); ?>
+	echo beans_close_markup( 'woo_checkout_coupon_clear', 'div' );
 
-<?php echo beans_close_markup( 'woo_checkout_coupon', 'form' ); ?>
+echo beans_close_markup( 'woo_checkout_coupon', 'form' );

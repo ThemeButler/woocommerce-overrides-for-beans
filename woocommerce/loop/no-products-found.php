@@ -11,10 +11,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
+echo beans_open_markup( 'woo_no_products', 'p', array( 'class' => 'woocommerce-info' ) );
 
-<?php echo beans_open_markup( 'woo_no_products', 'p', array( 'class' => 'woocommerce-info' ) ); ?>
+	_e( 'No products were found matching your selection.', 'woocommerce' );
 
-	<?php _e( 'No products were found matching your selection.', 'woocommerce' ); ?>
-
-<?php echo beans_close_markup( 'woo_no_products', 'p' ); ?>
+echo beans_close_markup( 'woo_no_products', 'p' );

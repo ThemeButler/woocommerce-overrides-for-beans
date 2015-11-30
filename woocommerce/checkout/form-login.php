@@ -21,13 +21,10 @@ $info_message .= beans_open_markup( 'woo_cart_login_form_login_link', 'a', array
 
 wc_print_notice( $info_message, 'notice' );
 
-?>
-
-<?php woocommerce_login_form(
-		array(
-			'message'  => __( 'If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.', 'woocommerce' ),
-			'redirect' => wc_get_page_permalink( 'checkout' ),
-			'hidden'   => true
-		)
-	);
-?>
+woocommerce_login_form(
+	array(
+		'message'  => __( 'If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing &amp; Shipping section.', 'woocommerce' ),
+		'redirect' => wc_get_page_permalink( 'checkout' ),
+		'hidden'   => true
+	)
+);

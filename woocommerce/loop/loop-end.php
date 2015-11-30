@@ -9,6 +9,4 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
-
-<?php echo beans_close_markup( 'woo_products_wrap', 'ul' ); ?>
+echo beans_close_markup( 'woo_products_wrap', 'ul' );

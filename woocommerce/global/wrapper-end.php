@@ -11,8 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $template = get_option( 'template' );
 
-switch( $template ) {
+switch( $template ) :
 
 	default :
 		break;
-}
+		
+endswitch;
