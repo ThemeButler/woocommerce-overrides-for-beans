@@ -30,47 +30,35 @@ endif;
 // Increase loop count
 $woocommerce_loop['loop'] ++;
 
-?>
+echo beans_open_markup( 'woo_product_category_list_item', 'li', array( wc_product_cat_class() ) );
 
-<?php echo beans_open_markup( 'woo_product_category_list_item', 'li', array( wc_product_cat_class() ) ); ?>
+	do_action( 'woocommerce_before_subcategory', $category );
 
-	<?php do_action( 'woocommerce_before_subcategory', $category ); ?>
+	echo beans_open_markup( 'woo_product_category_link', 'a', array( 'href' => get_term_link( $category->slug, 'product_cat' ) ) );
 
-	<?php echo beans_open_markup( 'woo_product_category_link', 'a', array( 'href' => get_term_link( $category->slug, 'product_cat' ) ) ); ?>
-
-		<?php
 			/**
 			 * woocommerce_before_subcategory_title hook
 			 *
 			 * @hooked woocommerce_subcategory_thumbnail - 10
 			 */
 			do_action( 'woocommerce_before_subcategory_title', $category );
-		?>
 
-		<?php echo beans_open_markup( 'woo_product_category_title', 'h3' ); ?>
-
-			<?php
+		echo beans_open_markup( 'woo_product_category_title', 'h3' );
 
 				echo $category->name;
 
 				if ( $category->count > 0 )
 					echo apply_filters( 'woocommerce_subcategory_count_html', beans_open_markup( 'woo_subcategory_count_html', 'mark', array( 'class' => 'count' ) ) . ' (' . $category->count . ')' . beans_close_markup( 'woo_subcategory_count_html', 'mark' ), $category );
 
-			?>
-
-		<?php echo beans_close_markup( 'woo_product_category_title', 'h3' ); ?>
-
-		<?php
+		echo beans_close_markup( 'woo_product_category_title', 'h3' );
 
 			/**
 			 * woocommerce_after_subcategory_title hook
 			 */
 			do_action( 'woocommerce_after_subcategory_title', $category );
 
-		?>
+	echo beans_close_markup( 'woo_product_category_link', 'a' );
 
-	<?php echo beans_close_markup( 'woo_product_category_link', 'a' ); ?>
+	do_action( 'woocommerce_after_subcategory', $category );
 
-	<?php do_action( 'woocommerce_after_subcategory', $category ); ?>
-
-<?php echo beans_close_markup( 'woo_product_category_list_item', 'li' ); ?>
+echo beans_close_markup( 'woo_product_category_list_item', 'li' );
