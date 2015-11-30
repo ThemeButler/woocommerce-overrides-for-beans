@@ -9,7 +9,6 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
-		<?php echo beans_close_markup( 'woo_auth_content', 'div' ); ?>
-	<?php echo beans_close_markup( 'woo_auth_body', 'body' ); ?>
-</html>
+		echo beans_close_markup( 'woo_auth_content', 'div' );
+	echo beans_close_markup( 'woo_auth_body', 'body' );
+echo '</html>';
