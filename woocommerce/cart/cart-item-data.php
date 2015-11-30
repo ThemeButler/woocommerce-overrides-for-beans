@@ -9,24 +9,22 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
+echo beans_open_markup( 'woo_cart_item_data', 'dl', array( 'class' => 'variation' ) );
 
-<?php echo beans_open_markup( 'woo_cart_item_data', 'dl', array( 'class' => 'variation' ) ); ?>
+	foreach ( $item_data as $data ) :
 
-	<?php foreach ( $item_data as $data ) : ?>
+		echo beans_open_markup( 'woo_cart_item_data_term', 'dt', array( 'class' => 'variation-' . sanitize_html_class( $data['key'] ) ) );
 
-		<?php echo beans_open_markup( 'woo_cart_item_data_term', 'dt', array( 'class' => 'variation-' . sanitize_html_class( $data['key'] ) ) ); ?>
+			echo wp_kses_post( $data['key'] );:
 
-			<?php echo wp_kses_post( $data['key'] ); ?>:
+		echo beans_close_markup( 'woo_cart_item_data_term', 'dt' );
 
-		<?php echo beans_close_markup( 'woo_cart_item_data_term', 'dt' ); ?>
+		echo beans_open_markup( 'woo_cart_item_data_definition', 'dd', array( 'class' => 'variation-' . sanitize_html_class( $data['key'] ) ) );
 
-		<?php echo beans_open_markup( 'woo_cart_item_data_definition', 'dd', array( 'class' => 'variation-' . sanitize_html_class( $data['key'] ) ) ); ?>
+			echo wp_kses_post( wpautop( $data['display'] ) );
 
-			<?php echo wp_kses_post( wpautop( $data['display'] ) ); ?>
+		echo beans_close_markup( 'woo_cart_item_data_definition', 'dd' );
 
-		<?php echo beans_close_markup( 'woo_cart_item_data_definition', 'dd' ); ?>
+	endforeach;
 
-	<?php endforeach; ?>
-
-<?php echo beans_close_markup( 'woo_cart_item_data', 'dl' ); ?>
+echo beans_close_markup( 'woo_cart_item_data', 'dl' );
