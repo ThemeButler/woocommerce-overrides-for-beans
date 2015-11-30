@@ -2,24 +2,34 @@
 /**
  * Single Product Price, including microdata for SEO
  *
- * @author  WooThemes
- * @package WooCommerce/Templates
- * @version 2.4.9
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $product;
 
-?>
-<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+echo beans_open_markup( 'woo_single_price_wrap', 'div', array(
+    'itemprop' => 'offers',
+    'itemscope' => '',
+    'itemtype' => 'http://schema.org/Offer'
+) );
 
-	<p class="price"><?php echo $product->get_price_html(); ?></p>
+	echo beans_open_markup( 'woo_single_price_p', 'p', array( 'class' => 'price' ) );
 
-	<meta itemprop="price" content="<?php echo esc_attr( $product->get_price() ); ?>" />
-	<meta itemprop="priceCurrency" content="<?php echo esc_attr( get_woocommerce_currency() ); ?>" />
-	<link itemprop="availability" href="http://schema.org/<?php echo $product->is_in_stock() ? 'InStock' : 'OutOfStock'; ?>" />
+		echo $product->get_price_html();
 
-</div>
+	echo beans_close_markup( 'woo_single_price_p', 'p' );
+
+    echo beans_selfclose_markup( 'woo_single_price_meta_price', 'meta', array( 'itemprop' => 'price', 'content' => $product->get_price() ) );
+
+    echo beans_selfclose_markup( 'woo_single_price_meta_currency', 'meta', array( 'itemprop' => 'priceCurrency', 'content' => $product->get_woocommerce_currency() ) );
+
+    echo beans_selfclose_markup( 'woo_single_price_meta_link', 'link', array(
+        'itemprop' => 'availability',
+        'href' => 'http://schema.org/' . $product->is_in_stock() ? 'InStock' : 'OutOfStock'
+    ) );
+
+echo beans_close_markup( 'woo_single_price_wrap', 'div' );
