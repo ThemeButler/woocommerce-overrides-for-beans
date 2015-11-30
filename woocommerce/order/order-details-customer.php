@@ -126,10 +126,13 @@ if ( ! wc_ship_to_billing_address_only() && $order->needs_shipping_address() ) :
 		echo beans_close_markup( 'woo_order_details_customer_billing_addresses_col2_header', 'header' );
 
 		echo beans_open_markup( 'woo_order_details_customer_billing_addresses_col2_address', 'address' );
-		<address>
+
 			echo ( $address = $order->get_formatted_shipping_address() ) ? $address : __( 'N/A', 'woocommerce' );
-		</address>
-	</div><!-- /.col-2 -->
-</div><!-- /.col2-set -->
+
+		echo beans_close_markup( 'woo_order_details_customer_billing_addresses_col2_address', 'address' );
+
+	echo beans_close_markup( 'woo_order_details_customer_billing_addresses_col2', 'div' );
+
+echo beans_open_markup( 'woo_order_details_customer_billing_addresses_wrap', 'div' );
 
 endif;
