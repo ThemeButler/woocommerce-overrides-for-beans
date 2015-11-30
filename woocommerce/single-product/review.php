@@ -9,47 +9,99 @@
  * @version     2.1.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
 
-?>
-<li itemprop="review" itemscope itemtype="http://schema.org/Review" <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+echo beans_open_markup( 'woo_single_review_item', 'li', array(
+	'itemprop' => 'review',
+	'itemscope' => '',
+	'itemtype' => 'http://schema.org/Review',
+	'id' => 'li-comment-' . comment_ID()
+) );
 
-	<div id="comment-<?php comment_ID(); ?>" class="comment_container">
+	echo beans_open_markup( 'woo_single_review_item_comment_wrap', 'div', array(
+		'id' => 'comment-' . comment_ID(),
+		'class' => 'comment_container'
+	) );
 
-		<?php echo get_avatar( $comment, apply_filters( 'woocommerce_review_gravatar_size', '60' ), '' ); ?>
+		echo get_avatar( $comment, apply_filters( 'woocommerce_review_gravatar_size', '60' ), '' );
 
-		<div class="comment-text">
+		echo beans_open_markup( 'woo_single_review_item_comment_text', 'div', array( 'class' => 'comment-text' ) );
 
-			<?php if ( $rating && get_option( 'woocommerce_enable_review_rating' ) == 'yes' ) : ?>
+			if ( $rating && get_option( 'woocommerce_enable_review_rating' ) == 'yes' ) :
 
-				<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="star-rating" title="<?php echo sprintf( __( 'Rated %d out of 5', 'woocommerce' ), $rating ) ?>">
-					<span style="width:<?php echo ( $rating / 5 ) * 100; ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'woocommerce' ); ?></span>
-				</div>
+				echo beans_open_markup( 'woo_single_review_item_comment_rating_wrap', 'div', array(
+					'itemprop' => 'reviewRating',
+					'itemscope' => '',
+					'itemtype' => 'http://schema.org/Rating',
+					'class' => 'star-rating',
+					'title' => sprintf( __( 'Rated %d out of 5', 'woocommerce' ), $rating )
+				) );
 
-			<?php endif; ?>
+					echo beans_open_markup( 'woo_single_review_item_comment_rating_indicator', 'span', array( 'style' => 'width:' . $rating / 5 ) * 100 . '%' ) );
 
-			<?php if ( $comment->comment_approved == '0' ) : ?>
+						echo beans_open_markup( 'woo_single_review_item_comment_value', 'strong', array( 'itemprop' => 'ratingValue' ) );
 
-				<p class="meta"><em><?php _e( 'Your comment is awaiting approval', 'woocommerce' ); ?></em></p>
+							echo $rating;
 
-			<?php else : ?>
+						echo beans_close_markup( 'woo_single_review_item_comment_value', 'strong' );
 
-				<p class="meta">
-					<strong itemprop="author"><?php comment_author(); ?></strong> <?php
+						_e( 'out of 5', 'woocommerce' );
 
-						if ( get_option( 'woocommerce_review_rating_verification_label' ) === 'yes' )
-							if ( wc_customer_bought_product( $comment->comment_author_email, $comment->user_id, $comment->comment_post_ID ) )
-								echo '<em class="verified">(' . __( 'verified owner', 'woocommerce' ) . ')</em> ';
+					echo beans_close_markup( 'woo_single_review_item_comment_rating_indicator', 'span' );
 
-					?>&ndash; <time itemprop="datePublished" datetime="<?php echo get_comment_date( 'c' ); ?>"><?php echo get_comment_date( wc_date_format() ); ?></time>:
-				</p>
+				echo beans_close_markup( 'woo_single_review_item_comment_rating_wrap', 'div' );
 
-			<?php endif; ?>
+			endif;
 
-			<div itemprop="description" class="description"><?php comment_text(); ?></div>
-		</div>
-	</div>
+			if ( $comment->comment_approved == '0' ) :
+
+				echo beans_open_markup( 'woo_single_review_item_comment_meta', 'p', array( 'class' => 'meta' ) );
+
+					echo beans_open_markup( 'woo_single_review_item_comment_meta_emphasis', 'em' );
+
+						_e( 'Your comment is awaiting approval', 'woocommerce' );
+
+						echo beans_close_markup( 'woo_single_review_item_comment_meta_emphasis', 'em' );
+
+				echo beans_close_markup( 'woo_single_review_item_comment_meta', 'p' );
+
+			else :
+
+				echo beans_open_markup( 'woo_single_review_item_comment_meta_author', 'p', array( 'class' => 'meta' ) );
+
+					echo beans_open_markup( 'woo_single_review_item_comment_meta_author_name', 'strong', array( 'itemprop' => 'author' ) );
+
+						comment_author();
+
+					echo beans_close_markup( 'woo_single_review_item_comment_meta_author_name', 'strong' );
+
+						if ( get_option( 'woocommerce_review_rating_verification_label' ) === 'yes' ) :
+
+							if ( wc_customer_bought_product( $comment->comment_author_email, $comment->user_id, $comment->comment_post_ID ) ) :
+
+								echo beans_open_markup( 'woo_single_review_item_comment_verified_badge', 'em', array( 'class' => 'verified' ) );
+
+									echo '(' . __( 'verified owner', 'woocommerce' ) . ')';
+
+								echo beans_close_markup( 'woo_single_review_item_comment_verified_badge', 'em' );
+
+							endif;
+
+						endif;
+
+					echo '&ndash;' . beans_open_markup( 'woo_single_review_item_comment_verified_badge', 'time', array(
+						'itemprop' => 'datePublished',
+						'datetime' => get_comment_date( 'c' )
+					) ) . get_comment_date( wc_date_format() ) . beans_close_markup( 'woo_single_review_item_comment_verified_badge', 'time' ):
+
+				echo beans_close_markup( 'woo_single_review_item_comment_meta_author', 'p' );
+
+			endif;
+
+			echo beans_open_markup( 'woo_single_review_item_description', 'div', array( 'itemprop' => 'description', 'class' => 'description' ) ) . comment_text() . beans_close_markup( 'woo_single_review_item_description', 'div' );
+
+		echo beans_close_markup( 'woo_single_review_item_comment_text', 'div' );
+
+	echo beans_close_markup( 'woo_single_review_item_comment_wrap', 'div' );
