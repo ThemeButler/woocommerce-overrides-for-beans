@@ -8,32 +8,40 @@
  * @see         woocommerce_breadcrumb()
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! empty( $breadcrumb ) ) {
+if ( ! empty( $breadcrumb ) ) :
 
 	echo $wrap_before;
 
-	foreach ( $breadcrumb as $key => $crumb ) {
+	foreach ( $breadcrumb as $key => $crumb ) :
 
 		echo $before;
 
-		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
-			echo '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
-		} else {
+		if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) :
+
+			echo beans_open_markup( 'woo_breadcrumbs_link', 'a', array(	'href' => esc_url( $crumb[1] ) ) );
+
+				echo esc_html( $crumb[0] );
+
+			echo beans_close_markup( 'woo_breadcrumbs_link', 'a' );
+
+		else :
+
 			echo esc_html( $crumb[0] );
-		}
+
+		endif;
 
 		echo $after;
 
-		if ( sizeof( $breadcrumb ) !== $key + 1 ) {
-			echo $delimiter;
-		}
+		if ( sizeof( $breadcrumb ) !== $key + 1 ) :
 
-	}
+			echo $delimiter;
+
+		endif;
+
+	endforeach;
 
 	echo $wrap_after;
 
-}
+endif;
