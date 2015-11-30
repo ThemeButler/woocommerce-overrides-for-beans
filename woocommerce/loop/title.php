@@ -7,9 +7,10 @@
  * @version 2.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-?>
-<h3><?php the_title(); ?></h3>
+echo beans_open_markup( 'woo_product_item_title', 'h3' );
+
+	the_title();
+
+echo beans_close_markup( 'woo_product_item_title', 'h3' );
