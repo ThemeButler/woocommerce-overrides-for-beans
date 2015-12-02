@@ -7,15 +7,15 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 global $product, $woocommerce_loop;
 
-if ( empty( $product ) || ! $product->exists() ) :
-
+if ( empty( $product ) || ! $product->exists() ) {
 	return;
-
-endif;
+}
 
 $related = $product->get_related( $posts_per_page );
 
@@ -35,28 +35,24 @@ $products = new WP_Query( $args );
 
 $woocommerce_loop['columns'] = $columns;
 
-if ( $products->have_posts() ) :
+if ( $products->have_posts() ) : ?>
 
-	echo beans_open_markup( 'woo_single_related_wrap', 'div', array( 'related products' ) );
+	<div class="related products">
 
-		echo beans_open_markup( 'woo_single_related_title', 'h2' );
+		<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
 
-			_e( 'Related Products', 'woocommerce' );
+		<?php woocommerce_product_loop_start(); ?>
 
-		echo beans_open_markup( 'woo_single_related_title', 'h2' );
+			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
 
-		woocommerce_product_loop_start();
+				<?php wc_get_template_part( 'content', 'product' ); ?>
 
-			while ( $products->have_posts() ) : $products->the_post();
+			<?php endwhile; // end of the loop. ?>
 
-				wc_get_template_part( 'content', 'product' );
+		<?php woocommerce_product_loop_end(); ?>
 
-			endwhile; // end of the loop
+	</div>
 
-		woocommerce_product_loop_end();
-
-	echo beans_close_markup( 'woo_single_related_wrap', 'div' );
-
-endif;
+<?php endif;
 
 wp_reset_postdata();
