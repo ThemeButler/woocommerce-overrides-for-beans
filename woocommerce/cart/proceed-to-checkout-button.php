@@ -16,6 +16,6 @@ echo beans_open_markup( 'woo_cart_checkout_link', 'a', array(
     'class' => 'checkout-button button alt wc-forward'
 ) );
 
-    __( 'Proceed to Checkout', 'woocommerce' );
+    _e( 'Proceed to Checkout', 'woocommerce' );
 
 echo beans_close_markup( 'woo_cart_checkout_link', 'a' );
