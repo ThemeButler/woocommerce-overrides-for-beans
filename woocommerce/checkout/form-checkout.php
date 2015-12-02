@@ -54,7 +54,7 @@ echo beans_open_markup( 'woo_checkout_form', 'form', array(
 
 			echo beans_close_markup( 'woo_checkout_shipping', 'div' );
 
-		echo beans_open_markup( 'woo_checkout_customer_details', 'div', array( 'class' => '' ) );
+		echo beans_close_markup( 'woo_checkout_customer_details', 'div' );
 
 		do_action( 'woocommerce_checkout_after_customer_details' );
 
