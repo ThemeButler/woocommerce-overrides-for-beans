@@ -7,17 +7,17 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 global $product, $woocommerce_loop;
 
 $upsells = $product->get_upsells();
 
-if ( sizeof( $upsells ) == 0 ) :
-
+if ( sizeof( $upsells ) == 0 ) {
 	return;
-
-endif;
+}
 
 $meta_query = WC()->query->get_meta_query();
 
@@ -36,28 +36,24 @@ $products = new WP_Query( $args );
 
 $woocommerce_loop['columns'] = $columns;
 
-if ( $products->have_posts() ) :
+if ( $products->have_posts() ) : ?>
 
-	echo beans_open_markup( 'woo_single_upsells_wrap', 'div', array( 'class' => 'upsells products' ) );
+	<div class="upsells products">
 
-		echo beans_open_markup( 'woo_single_upsells_title', 'h2' );
+		<h2><?php _e( 'You may also like&hellip;', 'woocommerce' ) ?></h2>
 
-			_e( 'You may also like&hellip;', 'woocommerce' );
+		<?php woocommerce_product_loop_start(); ?>
 
-		echo beans_close_markup( 'woo_single_upsells_title', 'h2' );
+			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
 
-		woocommerce_product_loop_start();
+				<?php wc_get_template_part( 'content', 'product' ); ?>
 
-			while ( $products->have_posts() ) : $products->the_post();
+			<?php endwhile; // end of the loop. ?>
 
-				wc_get_template_part( 'content', 'product' );
+		<?php woocommerce_product_loop_end(); ?>
 
-			endwhile; // end of the loop.
+	</div>
 
-		woocommerce_product_loop_end();
-
-	echo beans_close_markup( 'woo_single_upsells_wrap', 'div' );
-
-endif;
+<?php endif;
 
 wp_reset_postdata();
