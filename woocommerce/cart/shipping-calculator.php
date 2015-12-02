@@ -63,8 +63,7 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 
 					echo beans_open_markup( 'woo_shipping_calculator_country_option_' . esc_attr( $key ), 'option', array(
 						'value' => esc_attr( $key ),
-						'selected' => selected( WC()->customer->get_shipping_country()
-						#TODO Double check
+						'selected' => selected( WC()->customer->get_shipping_country(), esc_attr( $key ), false )
 					) );
 
 						echo esc_html( $value );
