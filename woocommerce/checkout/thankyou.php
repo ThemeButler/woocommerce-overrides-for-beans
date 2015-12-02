@@ -40,7 +40,7 @@ if ( $order ) :
 				'class' => 'button pay'
 			) );
 
-				_e( 'Pay', 'woocommerce' )
+				_e( 'Pay', 'woocommerce' );
 
 			echo beans_close_markup( 'woo_order_payment_link', 'a' );
 
