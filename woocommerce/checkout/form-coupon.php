@@ -15,7 +15,7 @@ if ( ! WC()->cart->coupons_enabled() ) :
 
 endif;
 
-$info_message = apply_filters( 'woocommerce_checkout_coupon_message', __( 'Have a coupon?', 'woocommerce' ) . beans_open_markup( 'woo_cart_coupon_form_login_link', 'a', array(
+$info_message = apply_filters( 'woocommerce_checkout_coupon_message', __( 'Have a coupon? ', 'woocommerce' ) . beans_open_markup( 'woo_cart_coupon_form_login_link', 'a', array(
 	'href' => '#',
 	'class' => 'showcoupon'
 ) ) . __( 'Click here to enter your code', 'woocommerce' ) . beans_close_markup( 'woo_cart_coupon_form_login_link', 'a' ) );
