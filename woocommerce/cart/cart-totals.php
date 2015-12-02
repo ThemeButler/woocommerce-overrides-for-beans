@@ -194,7 +194,7 @@ echo beans_open_markup( 'woo_cart_empty_notice', 'div', array(
 
 	endif;
 
-	echo beans_open_markup( 'woo_cart_proceed_to_checkout', 'div' );
+	echo beans_open_markup( 'woo_cart_proceed_to_checkout', 'div', array( 'class' => 'wc-proceed-to-checkout' ) );
 
 		do_action( 'woocommerce_proceed_to_checkout' );
 
