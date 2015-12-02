@@ -127,7 +127,7 @@ echo beans_open_markup( 'woo_cart_table', 'table', array(
 
 						else :
 
-							echo apply_filters( 'woocommerce_cart_item_name', sprintf( beans_open_markup( 'woo_cart_item_name_link', 'a', array( 'href' => '%s' ) )'%s ' . beans_close_markup( 'woo_cart_item_name_link', 'a' ), esc_url( $_product->get_permalink( $cart_item ) ), $_product->get_title() ), $cart_item, $cart_item_key );
+							echo apply_filters( 'woocommerce_cart_item_name', sprintf( beans_open_markup( 'woo_cart_item_name_link', 'a', array( 'href' => '%s' ) ) . '%s ' . beans_close_markup( 'woo_cart_item_name_link', 'a' ), esc_url( $_product->get_permalink( $cart_item ) ), $_product->get_title() ), $cart_item, $cart_item_key );
 
 						endif;
 
