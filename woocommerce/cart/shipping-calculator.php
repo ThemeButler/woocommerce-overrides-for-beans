@@ -92,7 +92,7 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 						'type' => 'hidden',
 						'name' => 'calc_shipping_state',
 						'id' => 'calc_shipping_state',
-						'placeholder' => esc_attr_e( 'State / county', 'woocommerce'
+						'placeholder' => esc_attr_e( 'State / county', 'woocommerce' )
 					) );
 
 
