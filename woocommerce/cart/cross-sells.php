@@ -37,7 +37,7 @@ if ( $products->have_posts() ) :
 
 		echo beans_open_markup( 'woo_cart_cross_sells_title', 'h2', array( 'class' => 'page-title' ) );
 
-			_e( 'You may be interested in&hellip;', 'woocommerce' )
+			_e( 'You may be interested in&hellip;', 'woocommerce' );
 
 		echo beans_close_markup( 'woo_cart_cross_sells_title', 'h2' );
 
