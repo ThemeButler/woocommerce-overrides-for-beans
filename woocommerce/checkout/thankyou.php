@@ -87,7 +87,7 @@ if ( $order ) :
 
 				echo beans_open_markup( 'woo_order_details_order_date_value', 'strong' );
 
-					date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) );
+					echo date_i18n( get_option( 'date_format' ), strtotime( $order->order_date ) );
 
 				echo beans_close_markup( 'woo_order_details_order_date_value', 'strong' );
 
