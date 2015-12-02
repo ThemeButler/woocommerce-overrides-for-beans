@@ -198,7 +198,7 @@ echo beans_open_markup( 'woo_cart_table', 'table', array(
 
 						echo beans_open_markup( 'woo_cart_contents_coupon_label', 'label', array( 'for' => 'coupon_code' ) );
 
-                            _e( 'Coupon', 'woocommerce' );:
+                            _e( 'Coupon', 'woocommerce' ) . ':';
 
 						echo beans_close_markup( 'woo_cart_contents_coupon_label', 'label' );
 
