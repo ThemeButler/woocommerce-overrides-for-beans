@@ -32,7 +32,7 @@ echo beans_open_markup( 'woo_checkout_shipping_fields', 'div', array( 'class' =>
 				'class' => 'checkbox'
 			) );
 
-				_e( 'Ship to a different address?', 'woocommerce' );
+				_e( 'Ship to a different address? ', 'woocommerce' );
 
 			echo beans_close_markup( 'woo_checkout_shipping_different_address_label', 'label' );
 
