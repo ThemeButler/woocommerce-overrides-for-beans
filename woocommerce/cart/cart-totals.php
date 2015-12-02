@@ -202,4 +202,4 @@ echo beans_open_markup( 'woo_cart_empty_notice', 'div', array(
 
 	do_action( 'woocommerce_after_cart_totals' );
 
-echo beans_close_markup( 'woo_cart_empty_notice', 'div' );
+echo beans_close_markup( 'woo_cart_totals_wrap', 'div' );
