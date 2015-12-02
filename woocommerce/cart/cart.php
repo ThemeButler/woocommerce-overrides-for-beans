@@ -208,14 +208,14 @@ echo beans_open_markup( 'woo_cart_table', 'table', array(
 							'class' => 'input-text',
 							'id' => 'coupon_code',
 							'value' => '',
-							'placeholder' => esc_attr_e( 'Coupon code', 'woocommerce' )
+							'placeholder' => __( 'Coupon code', 'woocommerce' )
 						) );
 
 						echo beans_selfclose_markup( 'woo_cart_contents_coupon_button', 'input', array(
 							'type' => 'submit',
 							'class' => 'button',
 							'name' => 'apply_coupon',
-							'value' => esc_attr_e( 'Apply Coupon', 'woocommerce' )
+							'value' => __( 'Apply Coupon', 'woocommerce' )
 						) );
 
 						do_action( 'woocommerce_cart_coupon' );
@@ -224,11 +224,11 @@ echo beans_open_markup( 'woo_cart_table', 'table', array(
 
 				endif;
 
-				echo beans_selfclose_markup( 'woo_cart_contents_button', 'td', array(
+				echo beans_selfclose_markup( 'woo_cart_contents_button', 'input', array(
 					'type' => 'submit',
 					'class' => 'button',
 					'name' => 'update_cart',
-					'value' => esc_attr_e( 'Update Cart', 'woocommerce' )
+					'value' => __( 'Update Cart', 'woocommerce' )
 				) );
 
 				do_action( 'woocommerce_cart_actions' );
