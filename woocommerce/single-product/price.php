@@ -23,9 +23,15 @@ echo beans_open_markup( 'woo_single_price_wrap', 'div', array(
 
 	echo beans_close_markup( 'woo_single_price_p', 'p' );
 
-    echo beans_selfclose_markup( 'woo_single_price_meta_price', 'meta', array( 'itemprop' => 'price', 'content' => $product->get_price() ) );
+    echo beans_selfclose_markup( 'woo_single_price_meta_price', 'meta', array(
+        'itemprop' => 'price',
+        'content' => esc_attr( $product->get_price() )
+     ) );
 
-    echo beans_selfclose_markup( 'woo_single_price_meta_currency', 'meta', array( 'itemprop' => 'priceCurrency', 'content' => $product->get_woocommerce_currency() ) );
+    echo beans_selfclose_markup( 'woo_single_price_meta_currency', 'meta', array(
+        'itemprop' => 'priceCurrency',
+        'content' => esc_attr( get_woocommerce_currency() )
+    ) );
 
     echo beans_selfclose_markup( 'woo_single_price_meta_link', 'link', array(
         'itemprop' => 'availability',
