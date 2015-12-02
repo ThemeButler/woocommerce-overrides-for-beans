@@ -31,13 +31,13 @@ echo beans_open_markup( 'woo_cart_table', 'table', array(
 
 			echo beans_open_markup( 'woo_cart_table_heading_remove', 'th', array( 'class' => 'product-remove' ) );
 
-				&nbsp;
+				echo '&nbsp';
 
 			echo beans_close_markup( 'woo_cart_table_heading_remove', 'th' );
 
 			echo beans_open_markup( 'woo_cart_table_heading_thumbnail', 'th', array( 'class' => 'product-thumbnail' ) );
 
-				&nbsp;
+				echo '&nbsp';
 
 			echo beans_close_markup( 'woo_cart_table_heading_thumbnail', 'th' );
 
