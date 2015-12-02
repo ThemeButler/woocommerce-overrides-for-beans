@@ -17,8 +17,7 @@ echo beans_open_markup( 'woo_checkout_payment_method_list_item', 'li', array( 'c
 		'class' => 'input-radio',
 		'name' => 'payment_method',
 		'value' => esc_attr( $gateway->id ),
-		'checked' => checked( $gateway->chosen, true ),
-		#TODO Double check
+		'checked' => $gateway->chosen, true ? 'checked' : '',
 		'data-order_button_text' => esc_attr( $gateway->order_button_text )
 	) );
 
