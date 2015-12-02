@@ -58,13 +58,25 @@ echo beans_open_markup( 'woo_checkout_payment_method_wrap', 'div', array(
 
 	echo beans_open_markup( 'woo_checkout_place_order_wrap', 'div', array( 'class' => 'form-row place-order' ) );
 
-		<noscript>_e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' );<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="esc_attr_e( 'Update totals', 'woocommerce' );" /></noscript>
+		echo '<noscript>';
+			_e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' );
+		 	echo '<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="' . __( 'Update totals', 'woocommerce' ) . '" /></noscript>';
 
 		wp_nonce_field( 'woocommerce-process_checkout' );
 
 		do_action( 'woocommerce_review_order_before_submit' );
 
-		echo apply_filters( 'woocommerce_order_button_html', beans_selfclose_markup( 'woo_order_button_html', 'input', array( 'type' => 'submit', 'class' => 'button alt', 'name' => 'woocommerce_checkout_place_order', 'id' => 'place_order', 'value' => esc_attr( $order_button_text ), 'data-value' => esc_attr( $order_button_text ) ) ) );
+		echo apply_filters(
+			'woocommerce_order_button_html',
+			beans_selfclose_markup( 'woo_order_button_html', 'input', array(
+				'type' => 'submit',
+				'class' => 'button alt',
+				'name' => 'woocommerce_checkout_place_order',
+				'id' => 'place_order',
+				'value' => esc_attr( $order_button_text ),
+				'data-value' => esc_attr( $order_button_text )
+			 ) )
+		);
 
 		if ( wc_get_page_id( 'terms' ) > 0 && apply_filters( 'woocommerce_checkout_show_terms', true ) ) :
 
@@ -84,7 +96,7 @@ echo beans_open_markup( 'woo_checkout_payment_method_wrap', 'div', array(
 					'class' => 'input-checkbox',
 					'name' => 'terms',
 					'checked' => checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ),
-					#TODO Double check
+					#Rewiew
 					'id' => 'terms'
 				) );
 
