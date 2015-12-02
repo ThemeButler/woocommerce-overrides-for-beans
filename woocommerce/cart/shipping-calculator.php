@@ -118,7 +118,6 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 								echo beans_open_markup( 'woo_shipping_calculator_state_option_' . esc_attr( $ckey ), 'option', array(
 									'value' => esc_attr( $ckey ),
 									'selected' => selected( $current_r, $ckey, false )
-									#TODO Double check
 								) );
 
 									__( esc_html( $cvalue ), 'woocommerce' );
@@ -130,8 +129,6 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 						echo beans_close_markup( 'woo_shipping_calculator_state_select', 'select' );
 
 					echo beans_close_markup( 'woo_shipping_calculator_state_wrap', 'span' );
-
-					<?php
 
 				// Standard Input
 
@@ -160,7 +157,7 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 				echo beans_selfclose_markup( 'woo_shipping_calculator_city_input', 'input', array(
 					'type' => 'text',
 					'class' => 'input-text',
-					'value' => esc_attr( WC()->customer->get_shipping_city(),
+					'value' => esc_attr( WC()->customer->get_shipping_city() ),
 					'placeholder' => esc_attr_e( 'City', 'woocommerce' ),
 					'name' => 'calc_shipping_city',
 					'id' => 'calc_shipping_city'
