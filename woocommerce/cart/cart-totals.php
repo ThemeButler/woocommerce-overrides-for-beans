@@ -9,9 +9,8 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-echo beans_open_markup( 'woo_cart_empty_notice', 'div', array(
-    'class' => 'cart_totals' . WC()->customer->has_calculated_shipping() ? 'calculated_shipping' : ''
-    #TODO: Double check
+echo beans_open_markup( 'woo_cart_totals_wrap', 'div', array(
+    'class' => 'cart_totals ' . ( WC()->customer->has_calculated_shipping() ? ' calculated_shipping' : '' )
 ) );
 
 	do_action( 'woocommerce_before_cart_totals' );
