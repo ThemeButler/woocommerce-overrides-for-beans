@@ -121,7 +121,7 @@ echo beans_open_markup( 'woo_shipping_calculator_form', 'form', array(
 									#TODO Double check
 								) );
 
-									__( esc_html( $cvalue );
+									__( esc_html( $cvalue ), 'woocommerce' );
 
 								echo beans_close_markup( 'woo_shipping_calculator_state_option_' . esc_attr( $ckey ), 'option' );
 
