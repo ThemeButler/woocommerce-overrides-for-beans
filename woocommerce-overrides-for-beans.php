@@ -35,7 +35,7 @@ function wcb_plugin_path() {
 
 }
 
-
+// Register the plugins WooCommerce template overrides
 add_filter( 'woocommerce_locate_template', 'wcb_woocommerce_locate_template', 10, 3 );
 
 function wcb_woocommerce_locate_template( $template, $template_name, $template_path ) {
@@ -43,7 +43,7 @@ function wcb_woocommerce_locate_template( $template, $template_name, $template_p
   global $woocommerce;
 
   $_template = $template;
-  
+
   if ( ! $template_path ) $template_path = $woocommerce->template_url;
   $plugin_path  = wcb_plugin_path() . '/woocommerce/';
 
@@ -66,4 +66,11 @@ function wcb_woocommerce_locate_template( $template, $template_name, $template_p
   // Return what we found
   return $template;
 
+}
+
+
+// Add WooCommerce theme support
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
 }
