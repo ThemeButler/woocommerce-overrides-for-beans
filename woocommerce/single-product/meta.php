@@ -23,14 +23,14 @@ echo beans_open_markup( 'woo_single_meta_wrap', 'div', array( 'class' => 'produc
 
 		echo beans_open_markup( 'woo_single_meta_sku_wrap', 'span', array( 'class' => 'sku_wrapper' ) );
 
-			_e( 'SKU:', 'woocommerce' );
+			_e( 'SKU: ', 'woocommerce' );
 
 			echo beans_open_markup( 'woo_single_meta_sku', 'span', array(
 				'class' => 'sku',
 				'itemprop' => 'sku'
 			) );
 
-				echo ( $sku = $product->get_sku() ) ? $sku : __( 'N/A', 'woocommerce' );
+				echo ( $sku = $product->get_sku() ) ? $sku : __( 'N/A', 'woocommerce' ) . ' ';
 
 			echo beans_close_markup( 'woo_single_meta_sku', 'span' );
 
@@ -39,7 +39,7 @@ echo beans_open_markup( 'woo_single_meta_wrap', 'div', array( 'class' => 'produc
 	endif;
 
 	echo $product->get_categories( ', ', beans_open_markup( 'woo_single_meta_category', 'span', array( 'class' => 'posted_in' ) ) . _n( 'Category:', 'Categories:', $cat_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_category', 'span' ) );
-
+	echo ' ';
 	echo $product->get_tags( ', ', beans_open_markup( 'woo_single_meta_tags', 'span', array( 'class' => 'tagged_as' ) ) . _n( 'Tag:', 'Tags:', $tag_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_tags', 'span' ) );
 
 	do_action( 'woocommerce_product_meta_end' );
