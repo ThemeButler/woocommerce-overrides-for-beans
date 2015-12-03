@@ -59,7 +59,11 @@ if ( $rating_count > 0 ) :
 
 		if ( comments_open() ) :
 
-			echo beans_open_markup( 'woo_single_rating_review_link', 'a', array( 'href' => '#reviews', 'class' => 'woocommerce-review-link', 'rel' => 'nofollow' ) );
+			echo beans_open_markup( 'woo_single_rating_review_link', 'a', array(
+				'href' => '#reviews',
+				'class' => 'woocommerce-review-link uk-margin-small-left',
+				'rel' => 'nofollow'
+			) );
 
 			(printf( _n( '%s customer review', '%s customer reviews', $review_count, 'woocommerce' ), beans_open_markup( 'woo_single_review_count', 'span', array(
 				'itemprop' => 'reviewCount',
