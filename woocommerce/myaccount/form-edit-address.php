@@ -47,7 +47,7 @@ else :
 				'type' => 'submit',
 				'class' => 'button',
 				'name' => 'save_address',
-				'value' => esc_attr_e( 'Save Address', 'woocommerce' )
+				'value' => __( 'Save Address', 'woocommerce' )
 			) );
 
 			wp_nonce_field( 'woocommerce-edit_address' );
