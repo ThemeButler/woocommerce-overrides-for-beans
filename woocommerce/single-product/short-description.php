@@ -19,6 +19,6 @@ endif;
 
 echo beans_open_markup( 'woo_single_short_description', 'div', array( 'itemprop' => 'description' ) );
 
-	echo apply_filters( 'woo_single_short_description', $post->post_excerpt )
+	echo apply_filters( 'woo_single_short_description', $post->post_excerpt );
 
 echo beans_close_markup( 'woo_single_short_description', 'div' );

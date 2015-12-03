@@ -39,7 +39,9 @@ echo beans_open_markup( 'woo_single_review_item', 'li', array(
 					'title' => sprintf( __( 'Rated %d out of 5', 'woocommerce' ), $rating )
 				) );
 
-					echo beans_open_markup( 'woo_single_review_item_comment_rating_indicator', 'span', array( 'style' => 'width:' . $rating / 5 ) * 100 . '%' ) );
+					echo beans_open_markup( 'woo_single_review_item_comment_rating_indicator', 'span', array(
+						'style' => 'width:' . ( $rating / 5 ) * 100 . '%'
+						) );
 
 						echo beans_open_markup( 'woo_single_review_item_comment_value', 'strong', array( 'itemprop' => 'ratingValue' ) );
 
@@ -94,7 +96,7 @@ echo beans_open_markup( 'woo_single_review_item', 'li', array(
 					echo '&ndash;' . beans_open_markup( 'woo_single_review_item_comment_verified_badge', 'time', array(
 						'itemprop' => 'datePublished',
 						'datetime' => get_comment_date( 'c' )
-					) ) . get_comment_date( wc_date_format() ) . beans_close_markup( 'woo_single_review_item_comment_verified_badge', 'time' ):
+					) ) . get_comment_date( wc_date_format() ) . beans_close_markup( 'woo_single_review_item_comment_verified_badge', 'time' );
 
 				echo beans_close_markup( 'woo_single_review_item_comment_meta_author', 'p' );
 
