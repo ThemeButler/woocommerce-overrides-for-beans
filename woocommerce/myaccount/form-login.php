@@ -52,7 +52,7 @@ do_action( 'woocommerce_before_customer_login_form' );
 					'class' => 'input-text',
 					'name' => 'username',
 					'id' => 'username',
-					'value' => ! empty( $_POST['username'] ) ? esc_attr( $_POST['username'] : null )
+					'value' => ! empty( $_POST['username'] ) ? esc_attr( $_POST['username'] ) : null
 				) );
 
 			echo beans_close_markup( 'woo_customer_login_username', 'p' );
@@ -86,9 +86,9 @@ do_action( 'woocommerce_before_customer_login_form' );
 					'type' => 'submit',
 					'class' => 'button',
 					'name' => 'login',
-					'value' => esc_attr_e( 'Login', 'woocommerce' )
+					'value' => __( 'Login', 'woocommerce' )
 				) );
-
+				echo ' ';
 				echo beans_open_markup( 'woo_customer_login_submit_remember_label', 'label', array(
 					'for' => 'rememberme',
 					'class' => 'inline'
@@ -101,7 +101,7 @@ do_action( 'woocommerce_before_customer_login_form' );
 					'value' => 'forever'
 				) );
 
-				_e( 'Remember me', 'woocommerce' );
+				_e( ' Remember me', 'woocommerce' );
 
 				echo beans_close_markup( 'woo_customer_login_submit_remember_label', 'label' );
 
@@ -175,7 +175,13 @@ if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) :
 
 				echo beans_close_markup( 'woo_customer_registration_email_label', 'label' );
 
-				echo beans_selfclose_markup( 'woo_customer_registration_email_input', 'input', array( 'type' => 'text', 'class' => 'input-text', 'name' => 'email', 'id' => 'reg_email', 'value' => if ( ! empty( $_POST['email'] ) ) echo esc_attr( $_POST['email'] ) ) );
+				echo beans_selfclose_markup( 'woo_customer_registration_email_input', 'input', array(
+					'type' => 'text',
+					'class' => 'input-text',
+					'name' => 'email',
+					'id' => 'reg_email',
+					'value' => ! empty( $_POST['email'] ) ? esc_attr( $_POST['email'] ) : ''
+				) );
 
 			echo beans_close_markup( 'woo_customer_registration_email', 'p' );
 
@@ -228,7 +234,7 @@ if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' ) :
 					'type' => 'submit',
 					'class' => 'button',
 					'name' => 'register',
-					'value' => esc_attr_e( 'Register', 'woocommerce' )
+					'value' => __( 'Register', 'woocommerce' )
 				) );
 
 			echo beans_close_markup( 'woo_customer_registration_submit', 'p' );
