@@ -15,7 +15,7 @@ echo beans_open_markup( 'woo_cart_item_data', 'dl', array( 'class' => 'variation
 
 		echo beans_open_markup( 'woo_cart_item_data_term', 'dt', array( 'class' => 'variation-' . sanitize_html_class( $data['key'] ) ) );
 
-			echo wp_kses_post( $data['key'] );:
+			echo wp_kses_post( $data['key'] );
 
 		echo beans_close_markup( 'woo_cart_item_data_term', 'dt' );
 
