@@ -50,28 +50,32 @@ endif;
 
 foreach ( $get_addresses as $name => $title ) :
 
-	echo beans_open_markup( 'woo_my_address_col1_address', 'div', array( 'class' => 'col-' . ( ( $col = $col * -1 ) < 0 ) ? 1 : 2 . ' address' ) );
+	$columns = ( ( $col = $col * -1 ) < 0 ) ? 1 : 2;
 
-		echo beans_open_markup( 'woo_my_address_col1_header', 'header', array( 'class' => 'title' ) );
+	echo beans_open_markup( 'woo_my_address_col' . $columns . '_address', 'div', array(
+		'class' => 'col-' . $columns . ' address'
+	) );
 
-			echo beans_open_markup( 'woo_my_address_col1_title', 'h3' );
+		echo beans_open_markup( 'woo_my_address_col' . $columns . '_header', 'header', array( 'class' => 'title' ) );
+
+			echo beans_open_markup( 'woo_my_address_col' . $columns . '_title', 'h3' );
 
 				echo $title;
 
-			echo beans_close_markup( 'woo_my_address_col1_title', 'h3' );
+			echo beans_close_markup( 'woo_my_address_col' . $columns . '_title', 'h3' );
 
-			echo beans_open_markup( 'woo_my_address_col1_edit_link', 'a', array(
+			echo beans_open_markup( 'woo_my_address_col' . $columns . '_edit_link', 'a', array(
 				'href' => wc_get_endpoint_url( 'edit-address', $name ),
 				'class' => 'edit'
 			) );
 
 				_e( 'Edit', 'woocommerce' );
 
-			echo beans_close_markup( 'woo_my_address_col1_edit_link', 'a' );
+			echo beans_close_markup( 'woo_my_address_col' . $columns . '_edit_link', 'a' );
 
-		echo beans_close_markup( 'woo_my_address_col1_header', 'header' );
+		echo beans_close_markup( 'woo_my_address_col' . $columns . '_header', 'header' );
 
-		echo beans_open_markup( 'woo_my_address_col1_address_wrap', 'address' );
+		echo beans_open_markup( 'woo_my_address_col' . $columns . '_address_wrap', 'address' );
 
 				$address = apply_filters( 'woocommerce_my_account_my_address_formatted_address', array(
 					'first_name'  => get_user_meta( $customer_id, $name . '_first_name', true ),
@@ -94,12 +98,12 @@ foreach ( $get_addresses as $name => $title ) :
 				else :
 
 					echo $formatted_address;
-					
+
 				endif;
 
-		echo beans_close_markup( 'woo_my_address_col1_address_wrap', 'address' );
+		echo beans_close_markup( 'woo_my_address_col' . $columns . '_address_wrap', 'address' );
 
-	echo beans_close_markup( 'woo_my_address_col1_address', 'div' );
+	echo beans_close_markup( 'woo_my_address_col' . $columns . '_address', 'div' );
 
 endforeach;
 
