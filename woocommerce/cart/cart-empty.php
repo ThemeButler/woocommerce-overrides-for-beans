@@ -13,7 +13,7 @@ wc_print_notices();
 
 echo beans_open_markup( 'woo_cart_empty_notice', 'p', array( 'class' => 'cart-empty' ) );
 
-    _e( 'Your cart is currently empty.', 'woocommerce' )
+    _e( 'Your cart is currently empty.', 'woocommerce' );
 
 echo beans_close_markup( 'woo_product_item_link', 'p' );
 
@@ -26,8 +26,8 @@ echo beans_open_markup( 'woo_cart_back_to_shop', 'p', array( 'class' => 'return-
         'class' => 'button wc-backward'
     ) );
 
-        _e( 'Return To Shop', 'woocommerce' )
+        _e( 'Return To Shop', 'woocommerce' );
 
-    echo beans_open_markup( 'woo_cart_back_to_shop_link', 'a' );
+    echo beans_close_markup( 'woo_cart_back_to_shop_link', 'a' );
 
 echo beans_close_markup( 'woo_cart_back_to_shop', 'p' );
