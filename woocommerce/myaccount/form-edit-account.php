@@ -35,7 +35,7 @@ echo beans_open_markup( 'woo_account_edit_form', 'form', array( 'action' => '', 
 
 	echo beans_close_markup( 'woo_account_edit_form_first', 'p' );
 
-	echo beans_open_markup( 'woo_account_edit_form_last', 'p', array( 'class' => 'form-row form-row-first' ) );
+	echo beans_open_markup( 'woo_account_edit_form_last', 'p', array( 'class' => 'form-row form-row-last' ) );
 
 		echo beans_open_markup( 'woo_account_edit_form_last_label', 'label', array( 'for' => 'account_last_name' ) );
 
@@ -57,7 +57,7 @@ echo beans_open_markup( 'woo_account_edit_form', 'form', array( 'action' => '', 
 
 	echo beans_open_markup( 'woo_account_edit_form_clear', 'div', array( 'class' => 'clear' ) ) . beans_close_markup( 'woo_account_edit_form_clear', 'div' );
 
-	echo beans_open_markup( 'woo_account_edit_form_email', 'p', array( 'class' => 'form-row form-row-first' ) );
+	echo beans_open_markup( 'woo_account_edit_form_email', 'p', array( 'class' => 'form-row form-row-wide' ) );
 
 		echo beans_open_markup( 'woo_account_edit_form_email_label', 'label', array( 'for' => 'account_email' ) );
 
@@ -72,7 +72,7 @@ echo beans_open_markup( 'woo_account_edit_form', 'form', array( 'action' => '', 
 			'class' => 'input-text',
 			'name' => 'account_email',
 			'id' => 'account_email',
-			'value' => esc_attr( $user->email )
+			'value' => esc_attr( $user->user_email )
 		) );
 
 	echo beans_close_markup( 'woo_account_edit_form_email', 'p' );
@@ -150,12 +150,13 @@ echo beans_open_markup( 'woo_account_edit_form', 'form', array( 'action' => '', 
 			'type' => 'submit',
 			'class' => 'button',
 			'name' => 'save_account_details',
-			'value' => esc_attr_e( 'Save changes', 'woocommerce' )
+			'value' => __( 'Save changes', 'woocommerce' )
 		) );
 
 		echo beans_selfclose_markup( 'woo_account_edit_form_submit_hidden_input', 'input', array(
 			'type' => 'hidden',
-			'name' => 'save_account_details'
+			'name' => 'action',
+			'value' => 'save_account_details'
 		) );
 
 	echo beans_close_markup( 'woo_account_edit_form_submit', 'p' );
