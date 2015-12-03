@@ -40,7 +40,7 @@ echo beans_open_markup( 'woo_single_meta_wrap', 'div', array( 'class' => 'produc
 
 	echo $product->get_categories( ', ', beans_open_markup( 'woo_single_meta_category', 'span', array( 'class' => 'posted_in' ) ) . _n( 'Category:', 'Categories:', $cat_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_category', 'span' ) );
 
-	echo $product->get_tags( ', ', beans_open_markup( 'woo_single_meta_tags', 'span', array( 'class' => 'tagged_as' ) ) . _n( 'Tag:', 'Tags:', $tag_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_tags', 'span' ) ) );
+	echo $product->get_tags( ', ', beans_open_markup( 'woo_single_meta_tags', 'span', array( 'class' => 'tagged_as' ) ) . _n( 'Tag:', 'Tags:', $tag_count, 'woocommerce' ) . ' ', beans_close_markup( 'woo_single_meta_tags', 'span' ) );
 
 	do_action( 'woocommerce_product_meta_end' );
 
