@@ -105,6 +105,6 @@ echo beans_open_markup( 'woo_single_add_to_cart_variable_form', 'form', array(
 
 	do_action( 'woocommerce_after_variations_form' );
 
-echo beans_open_markup( 'woo_single_add_to_cart_variable_form', 'form' );
+echo beans_close_markup( 'woo_single_add_to_cart_variable_form', 'form' );
 
 do_action( 'woocommerce_after_add_to_cart_form' );
