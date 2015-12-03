@@ -64,7 +64,7 @@ if ( $rating_count > 0 ) :
 			(printf( _n( '%s customer review', '%s customer reviews', $review_count, 'woocommerce' ), beans_open_markup( 'woo_single_review_count', 'span', array(
 				'itemprop' => 'reviewCount',
 				'class' => 'review'
-			) ) . $review_count . beans_close_markup( 'woo_single_review_count', 'span' ) );
+			) ) . $review_count . beans_close_markup( 'woo_single_review_count', 'span' ) ) );
 
 			echo beans_close_markup( 'woo_single_rating_review_link', 'a' );
 
