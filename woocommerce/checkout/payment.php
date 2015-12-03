@@ -96,7 +96,7 @@ echo beans_open_markup( 'woo_checkout_payment_method_wrap', 'div', array(
 					'class' => 'input-checkbox',
 					'name' => 'terms',
 					'checked' => checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ),
-					#Rewiew
+					#Review
 					'id' => 'terms'
 				) );
 
