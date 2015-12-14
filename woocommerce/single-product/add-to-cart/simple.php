@@ -49,7 +49,7 @@ if ( $product->is_in_stock() ) :
 
 	 		endif;
 
-			echo beans_selfclose_markup( 'woo_single_add_to_cart_simple_input_hidden', 'button', array(
+			echo beans_selfclose_markup( 'woo_single_add_to_cart_simple_input_hidden', 'input', array(
 				'type' => 'hidden',
 				'name' => 'add-to-cart',
 				'value' => esc_attr( $product->id )
