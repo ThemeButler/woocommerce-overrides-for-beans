@@ -30,7 +30,7 @@ endif;
 // Increase loop count
 $woocommerce_loop['loop'] ++;
 
-echo beans_open_markup( 'woo_product_category_list_item', 'li', array( wc_product_cat_class() ) );
+echo beans_open_markup( 'woo_product_category_list_item', 'li', array( 'class' => implode(' ', wc_product_cat_class( $classes ) ) ) );
 
 	do_action( 'woocommerce_before_subcategory', $category );
 
