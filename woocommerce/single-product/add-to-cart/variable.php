@@ -60,9 +60,17 @@ echo beans_open_markup( 'woo_single_add_to_cart_variable_form', 'form', array(
 
 							$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) : $product->get_variation_default_attribute( $attribute_name );
 
-							wc_dropdown_variation_attribute_options( array( 'options' => $options, 'attribute' => $attribute_name, 'product' => $product, 'selected' => $selected ) );
+							wc_dropdown_variation_attribute_options( array(
+								'options' => $options,
+								'attribute' => $attribute_name,
+								'product' => $product,
+								'selected' => $selected
+							) );
 
-							echo end( $attribute_keys ) === $attribute_name ? beans_open_markup( 'woo_single_add_to_cart_remove_variation_link', 'a', array( 'class' => 'reset_variations', 'href' => '#' ) ) . __( 'Clear selection', 'woocommerce' ) . beans_close_markup( 'woo_single_add_to_cart_remove_variation_link', 'a' ) : '';
+							echo end( $attribute_keys ) === $attribute_name ? beans_open_markup( 'woo_single_add_to_cart_remove_variation_link', 'a', array(
+								'class' => 'reset_variations',
+								'href' => '#'
+							) ) . __( 'Clear selection', 'woocommerce' ) . beans_close_markup( 'woo_single_add_to_cart_remove_variation_link', 'a' ) : '';
 
 
 						echo beans_close_markup( 'woo_single_add_to_cart_variable_value_cell', 'td' );
@@ -77,7 +85,10 @@ echo beans_open_markup( 'woo_single_add_to_cart_variable_form', 'form', array(
 
 		do_action( 'woocommerce_before_add_to_cart_button' );
 
-		echo beans_open_markup( 'woo_single_add_to_cart_single_variation_wrap', 'div', array( 'class' => 'single_variation_wrap', 'style' => 'display:none;' ) );
+		echo beans_open_markup( 'woo_single_add_to_cart_single_variation_wrap', 'div', array(
+			'class' => 'single_variation_wrap',
+			'style' => 'display:none;'
+		) );
 
 			/**
 			 * woocommerce_before_single_variation Hook
