@@ -35,24 +35,28 @@ $products = new WP_Query( $args );
 
 $woocommerce_loop['columns'] = $columns;
 
-if ( $products->have_posts() ) : ?>
+if ( $products->have_posts() ) :
 
-	<div class="related products">
+	echo beans_open_markup( 'woo_single_related_wrap', 'div', array( 'class' => 'related products' ) );
 
-		<h2><?php _e( 'Related Products', 'woocommerce' ); ?></h2>
+		echo beans_open_markup( 'woo_single_related_title', 'h2' );
 
-		<?php woocommerce_product_loop_start(); ?>
+			_e( 'Related Products', 'woocommerce' );
 
-			<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+		echo beans_close_markup( 'woo_single_related_title', 'h2' );
 
-				<?php wc_get_template_part( 'content', 'product' ); ?>
+		woocommerce_product_loop_start();
 
-			<?php endwhile; // end of the loop. ?>
+			while ( $products->have_posts() ) : $products->the_post();
 
-		<?php woocommerce_product_loop_end(); ?>
+				wc_get_template_part( 'content', 'product' );
 
-	</div>
+			endwhile; // end of the loop.
 
-<?php endif;
+		woocommerce_product_loop_end();
+
+	echo beans_close_markup( 'woo_single_related_wrap', 'div'
+
+endif;
 
 wp_reset_postdata();
