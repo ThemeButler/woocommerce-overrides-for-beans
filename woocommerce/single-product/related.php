@@ -55,7 +55,7 @@ if ( $products->have_posts() ) :
 
 		woocommerce_product_loop_end();
 
-	echo beans_close_markup( 'woo_single_related_wrap', 'div'
+	echo beans_close_markup( 'woo_single_related_wrap', 'div' );
 
 endif;
 
