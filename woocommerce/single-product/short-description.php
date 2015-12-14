@@ -25,4 +25,4 @@ echo beans_open_markup( 'woo_single_short_description', 'div', array( 'itemprop'
 
 	echo beans_close_markup( 'woo_single_short_description_text', 'p' );
 
-	echo beans_close_markup( 'woo_single_short_description', 'div' );
+echo beans_close_markup( 'woo_single_short_description', 'div' );
