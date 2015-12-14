@@ -66,7 +66,7 @@ if ( $product->is_in_stock() ) :
 
 		do_action( 'woocommerce_after_add_to_cart_button' );
 
-	echo beans_open_markup( 'woo_single_add_to_cart_simple_form', 'form' );
+	echo beans_close_markup( 'woo_single_add_to_cart_simple_form', 'form' );
 
 	do_action( 'woocommerce_after_add_to_cart_form' );
 
