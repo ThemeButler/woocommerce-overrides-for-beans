@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Overrides for Beans
 Plugin URI: http://www.themebutler.com
 Description: Utilize the power of Beans in your WooCommerce projects. Can be used with the Beans parent theme or child-themes created for Beans.
-Version: 0.5.0
+Version: 1.0.0-Alpha-1
 Author: ThemeButler
 Author URI: http://www.themebutler.com
 License: GNU GPL v2
