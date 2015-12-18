@@ -29,7 +29,7 @@ if ( $product->is_in_stock() ) :
 
 	do_action( 'woocommerce_before_add_to_cart_form' );
 
-	echo beans_open_markup( 'woo_single_add_to_cart_simple_form', 'form', array(
+	echo beans_open_markup( 'woo_single_cart_simple_form', 'form', array(
 		'class' => 'cart',
 		'method' => 'post',
 		'enctype' => 'multipart/form-data'
@@ -49,24 +49,25 @@ if ( $product->is_in_stock() ) :
 
 	 		endif;
 
-			echo beans_selfclose_markup( 'woo_single_add_to_cart_simple_input_hidden', 'input', array(
+			echo beans_selfclose_markup( 'woo_single_cart_simple_input_hidden', 'input', array(
 				'type' => 'hidden',
 				'name' => 'add-to-cart',
 				'value' => esc_attr( $product->id )
 			) );
 
-		echo beans_open_markup( 'woo_single_add_to_cart_simple_submit_button', 'button', array(
+		echo beans_open_markup( 'woo_single_cart_simple_button', 'button', array(
 			'type' => 'submit',
 			'class' => 'single_add_to_cart_button button alt'
 		) );
-
+		// Bug: Markup ID not getting added to output
+		
 			echo esc_html( $product->single_add_to_cart_text() );
 
-		echo beans_close_markup( 'woo_single_add_to_cart_grouped_tbody_submit_button', 'button' );
+		echo beans_close_markup( 'woo_single_cart_simple_button', 'button' );
 
 		do_action( 'woocommerce_after_add_to_cart_button' );
 
-	echo beans_close_markup( 'woo_single_add_to_cart_simple_form', 'form' );
+	echo beans_close_markup( 'woo_single_cart_simple_form', 'form' );
 
 	do_action( 'woocommerce_after_add_to_cart_form' );
 
