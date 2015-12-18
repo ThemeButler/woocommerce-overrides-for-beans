@@ -26,7 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 endif;
 
-echo beans_open_markup( 'woo_product_single_wrap', 'div', array( 'itemscope' => '', 'itemtype' => woocommerce_get_product_schema(), 'id' => 'product-' . the_ID(), 'class' => implode(' ', post_class() ) ) );
+echo beans_open_markup( 'woo_product_single_wrap', 'div', array(
+    'itemscope' => '',
+    'itemtype' => woocommerce_get_product_schema(),
+    'id' => 'product-' . the_ID(),
+    'class' => implode(' ', post_class() )
+) );
 
 #TODO Double check
 
