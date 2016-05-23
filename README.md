@@ -8,7 +8,7 @@ The WooCommerce Overrides plugin is currently **in alpha**, meaning it is not re
 
 Current version: **1.0.0 Alpha 2**
 
-### How to help
+## How you can help
 
 Extensive testing is needed before the plugin can safely be released as stable. Please help out with testing and report any issues you find here:
 
