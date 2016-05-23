@@ -29,7 +29,7 @@ endif;
 echo beans_open_markup( 'woo_product_single_wrap', 'div', array(
     'itemscope' => '',
     'itemtype' => woocommerce_get_product_schema(),
-    'id' => 'product-' . the_ID(),
+    'id' => 'product-' . get_the_ID(),
     'class' => implode(' ', post_class() )
 ) );
 
