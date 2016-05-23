@@ -72,3 +72,18 @@ add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
+
+
+// Use the Beans layout engine
+add_filter( 'beans_layout', 'wcb_woocommerce_layout' );
+
+function wcb_woocommerce_layout( $layout ) {
+
+    // Get the layout post meta from woo shop page.
+    if ( is_shop() ) {
+        return beans_get_post_meta( 'beans_layout', beans_get_default_layout(), wc_get_page_id( 'shop' ) );
+    }
+
+    return $layout;
+
+}
