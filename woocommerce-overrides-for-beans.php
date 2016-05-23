@@ -28,12 +28,10 @@ beans_load_api_components( array(
 	'widget'
 ) );
 
-function wcb_plugin_path() {
 
-  // gets the absolute path to this plugin directory
-  return untrailingslashit( plugin_dir_path( __FILE__ ) );
+// Define constants
+define( 'WCB_PLUGIN_PATH' untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-}
 
 // Register the plugins WooCommerce template overrides
 add_filter( 'woocommerce_locate_template', 'wcb_woocommerce_locate_template', 10, 3 );
@@ -45,7 +43,7 @@ function wcb_woocommerce_locate_template( $template, $template_name, $template_p
   $_template = $template;
 
   if ( ! $template_path ) $template_path = $woocommerce->template_url;
-  $plugin_path  = wcb_plugin_path() . '/woocommerce/';
+  $plugin_path  = WCB_PLUGIN_PATH . '/woocommerce/';
 
   // Look within passed path within the theme - this is priority
   $template = locate_template(
