@@ -6,7 +6,11 @@ This plugin connects WooCommerce with the awesome Beans framework, allowing you 
 
 The WooCommerce Overrides plugin is currently **in alpha**, meaning it is not ready for use on live sites. Want it sooner? You can help by testing the plugin and reporting any issues on the Github issue list.
 
-### Report any issues you find here:
+Current version: **1.0.0 Alpha 2**
+
+### How to help
+
+Extensive testing is needed before the plugin can safely be released as stable. Please help out with testing and report any issues you find here:
 
 https://github.com/ThemeButler/woocommerce-overrides-for-beans/issues
 
