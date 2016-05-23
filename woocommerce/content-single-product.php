@@ -69,7 +69,7 @@ echo beans_open_markup( 'woo_product_single_wrap', 'div', array(
 		 */
 		do_action( 'woocommerce_after_single_product_summary' );
 
-	echo beans_selfclose_markup( 'woo_product_single_meta_url', 'meta', array( 'itemprop' => 'url', 'content' => the_permalink() ) );
+	echo beans_selfclose_markup( 'woo_product_single_meta_url', 'meta', array( 'itemprop' => 'url', 'content' => get_the_permalink() ) );
 
 echo beans_close_markup( 'woo_product_single_wrap', 'div' ); echo '<!-- #product-the_ID(); ?> -->';
 
